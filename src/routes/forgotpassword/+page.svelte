@@ -13,7 +13,7 @@
   async function submit() {
     progress = true;
     await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: location.origin + hrefs.passwordreset,
+      redirectTo: "https://astrofetch.netlify.app/passwordreset",
     });
     toast = createToast(
       "info",
