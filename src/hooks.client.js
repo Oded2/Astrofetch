@@ -1,5 +1,7 @@
 import { toasts } from "svelte-toasts";
 
+const dateOptions = { month: "long", day: "numeric", year: "numeric" };
+
 export function dateToStr(date = new Date()) {
   return date.toISOString().split("T")[0];
 }
@@ -48,4 +50,28 @@ export async function fetchFromEndpoint(ref = "", params = {}) {
 }
 export function hasNormalCharacters(inputString = "") {
   return inputString.length == 0 ? true : /^[a-zA-Z0-9]+$/.test(inputString);
+}
+
+export function dateAdjust(milliseconds = 0, date = new Date(), max) {
+  const result = new Date(date.valueOf() + milliseconds);
+  if (max && result > max) return max;
+  return result;
+}
+export function formatDate(date = new Date(), options = dateOptions) {
+  const formatDate = date.toLocaleDateString("en-US", options);
+  return formatDate;
+}
+
+export function maxLen(string = "", maxLen = 200) {
+  if (maxLen >= string.length) {
+    return string;
+  }
+  let newString = "";
+  for (let i in string) {
+    if (i == maxLen - 3) {
+      return newString + "...";
+    }
+    newString += string[i];
+  }
+  return string;
 }

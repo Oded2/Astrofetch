@@ -6,5 +6,6 @@
     "vault": "/protected/vault",
     "account": "/protected/account",
     "signout": "/signout",
+    "viewer": "/viewer",
     "apiNasa": "/apis/nasa"
 }
