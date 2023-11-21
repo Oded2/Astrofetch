@@ -31,9 +31,10 @@
     <h2 class="card-title font-bold">{item.title}</h2>
     <h3 class="font-semibold">{formatDateStr(item.date)}</h3>
     <p>{maxLen(item.explanation)}</p>
-    <div class=" mt-3 card-actions justify-end">
+    <div class="mt-3 card-actions justify-end">
       {#if item.media_type === "image" || item.media_type === "video"}
         <a
+          target="_blank"
           data-sveltekit-preload-data="off"
           href={addParamsString(hrefs.viewer, { date: item.date })}
           class="btn btn-secondary w-24">View</a
