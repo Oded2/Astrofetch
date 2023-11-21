@@ -1,16 +1,40 @@
 <script>
+  import hrefs from "$lib/hrefs.json";
+  import { goto } from "$app/navigation";
   import FormInput from "$lib/components/FormInput.svelte";
+  import ToastSetup from "$lib/components/ToastSetup.svelte";
+  import { createToast } from "../../hooks.client.js";
   import SignupCard from "../../lib/components/cards/SignupCard.svelte";
+  export let data;
+  const { supabase } = data;
+  let toast;
   let email = "";
   let password = "";
   let inProgress = false;
+  async function submit() {
+    inProgress = true;
+    const error = await handleLogin();
+    inProgress = false;
+    if (error) {
+      toast = createToast("error", "Error", error.message);
+      return;
+    }
+    goto(hrefs.home);
+  }
+  async function handleLogin() {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    return error;
+  }
 </script>
 
 <main>
   <div class="container mx-auto my-10">
     <div class="flex justify-center">
       <SignupCard>
-        <form on:submit|preventDefault>
+        <form on:submit|preventDefault={submit}>
           <div class="mb-4">
             <label for="email" class="card-title mb-2">Email</label>
             <FormInput
@@ -42,3 +66,5 @@
     </div>
   </div>
 </main>
+
+<ToastSetup {toast} />

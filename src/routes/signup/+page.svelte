@@ -19,14 +19,14 @@
       alert("Invalid Credentials");
       return;
     }
-    if (!checkForUsername()) {
+    inProgress = true;
+    if (!(await checkForUsername())) {
       toast = createToast("error", "Username unavailable");
+      inProgress = false;
       return;
     }
-    inProgress = true;
     await handleSignUp();
     isComplete = true;
-    inProgress = false;
   }
   async function handleSignUp() {
     const {

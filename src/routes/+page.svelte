@@ -3,7 +3,7 @@
   import hrefs from "$lib/hrefs.json";
   import Title from "$lib/Title.svelte";
   export let data;
-  const { supabase } = data;
+  const { session } = data;
 </script>
 
 <main>
