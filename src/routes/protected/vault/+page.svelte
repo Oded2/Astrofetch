@@ -1,7 +1,7 @@
 <script>
   import AstroCard from "$lib/components/AstroCard.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
-  import { createToast } from "../../../hooks.client.js";
+  import { createToast, GetSortOrder } from "../../../hooks.client.js";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
@@ -9,6 +9,7 @@
   export let data;
   const { supabase, session } = data;
   let { items } = data;
+  items = items.sort(GetSortOrder("date"));
   let toast;
   let progress = false;
   async function deleteFromVault(item = {}) {

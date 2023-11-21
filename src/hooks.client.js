@@ -75,3 +75,13 @@ export function maxLen(string = "", maxLen = 200) {
   }
   return string;
 }
+export function GetSortOrder(prop, reverse = false) {
+  return function (a, b) {
+    if (a[prop] > b[prop]) {
+      return reverse ? -1 : 1;
+    } else if (a[prop] < b[prop]) {
+      return reverse ? 1 : -1;
+    }
+    return 0;
+  };
+}
