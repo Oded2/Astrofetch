@@ -1,9 +1,36 @@
 <script>
   import AccordionItem from "$lib/components/AccordionItem.svelte";
+  import FormInput from "$lib/components/FormInput.svelte";
   import hrefs from "$lib/hrefs.json";
   import Title from "$lib/Title.svelte";
+  import { createToast } from "../hooks.client.js";
+  import ToastSetup from "$lib/components/ToastSetup.svelte";
   export let data;
   const { session } = data;
+  const formspree = "https://formspree.io/f/meqbwbjl";
+  let toast;
+  let inProgress = false;
+  let email = session ? session.user.email : "";
+  let name = "";
+  let message = "";
+  async function contact() {
+    inProgress = true;
+    await fetch(formspree, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        name,
+        message,
+      }),
+    });
+    inProgress = false;
+    toast = createToast("success", "Success", "Message sent successfully");
+    message = "";
+  }
 </script>
 
 <main>
@@ -60,14 +87,52 @@
           <a class="underline" href={hrefs.fetch}>fetch</a> button.
         </p>
       </AccordionItem>
-      <AccordionItem header="Contact">
-        <p class="text-lg">
-          If you wish to contact me, feel free to use the one-click contact
-          form.
-        </p>
+      <AccordionItem header="Contact" checked>
+        <form on:submit|preventDefault={contact}>
+          <div class="mb-4">
+            <label for="email" class="card-title mb-2">Email</label>
+            <FormInput
+              type="email"
+              id="email"
+              placeholder="someone@domain.com"
+              required
+              bind:value={email}
+            />
+          </div>
+          <div class="mb-4">
+            <label for="name" class="card-title mb-2">Name</label>
+            <FormInput
+              type="text"
+              id="name"
+              placeholder="Your name"
+              required
+              bind:value={name}
+            />
+          </div>
+          <div class="mb-4">
+            <label for="message" class="card-title mb-2">Message</label>
+            <FormInput
+              type="textarea"
+              rows="3"
+              cols="0"
+              required
+              id="message"
+              bind:value={message}
+            />
+          </div>
+          <div class="card-actions justify-end">
+            <button
+              disabled={inProgress}
+              type="submit"
+              class="btn btn-primary px-10">Submit</button
+            >
+          </div>
+        </form>
       </AccordionItem>
     </div>
   </div>
 </main>
+
+<ToastSetup {toast} />
 
 <Title title="Home" />

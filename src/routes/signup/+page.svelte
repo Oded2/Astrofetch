@@ -86,7 +86,7 @@
               <div class="mb-4">
                 <label for="email" class="card-title mb-2">Email</label>
                 <FormInput
-                  required={true}
+                  required
                   type="email"
                   id="email"
                   placeholder="someone@domain.com"
@@ -96,7 +96,7 @@
               <div class="mb-4">
                 <label for="username" class="card-title mb-2">Username</label>
                 <FormInput
-                  required={true}
+                  required
                   type="text"
                   id="username"
                   placeholder="Choose a username"
@@ -108,12 +108,12 @@
                   unique.
                 </div>
               </div>
-              <div class="mb-4">
+              <div>
                 <label for="displayname" class="card-title mb-2"
                   >Display Name</label
                 >
                 <FormInput
-                  required={true}
+                  required
                   type="text"
                   id="displayname"
                   placeholder="Choose a display name"
@@ -131,7 +131,7 @@
               <div class="mb-4">
                 <label for="password" class="card-title mb-2">Password</label>
                 <FormInput
-                  required={true}
+                  required
                   type="password"
                   id="password"
                   bind:value={password}
@@ -148,7 +148,7 @@
                 </label>
                 <FormInput
                   error={!validpass && confirmPassword.length > 0}
-                  required={true}
+                  required
                   type="password"
                   id="confirmpassword"
                   bind:value={confirmPassword}

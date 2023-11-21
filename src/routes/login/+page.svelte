@@ -38,7 +38,7 @@
           <div class="mb-4">
             <label for="email" class="card-title mb-2">Email</label>
             <FormInput
-              required={true}
+              required
               bind:value={email}
               type="email"
               placeholder="someone@domain.com"
@@ -47,7 +47,7 @@
           <div class="mb-4">
             <label for="password" class="card-title mb-2">Password</label>
             <FormInput
-              required={true}
+              required
               bind:value={password}
               type="password"
               min="8"
