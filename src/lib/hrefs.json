@@ -5,5 +5,6 @@
     "fetch": "/protected/fetch",
     "vault": "/protected/vault",
     "account": "/protected/account",
-    "signout": "/signout"
+    "signout": "/signout",
+    "apiNasa": "/apis/nasa"
 }

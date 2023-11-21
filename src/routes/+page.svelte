@@ -19,20 +19,32 @@
     <div class="md:grid grid-cols-2 gap-24 mb-10 px-5 md:px-0">
       <div>
         <a
-          href={hrefs.fetch}
+          href={session ? hrefs.fetch : hrefs.signup}
           class="btn btn-primary btn-lg w-full mb-5 shadow-xl"
-          ><i class="fa-solid fa-rss" /> New Fetch</a
         >
+          {#if session}
+            <i class="fa-solid fa-rss" /> New Fetch
+          {:else}
+            Create Account
+          {/if}
+        </a>
       </div>
 
       <div>
-        <a href={hrefs.vault} class="btn btn-secondary btn-lg w-full shadow-xl"
-          ><i class="fa-solid fa-vault" /> View Vault</a
+        <a
+          href={session ? hrefs.vault : hrefs.login}
+          class="btn btn-secondary btn-lg w-full shadow-xl"
         >
+          {#if session}
+            <i class="fa-solid fa-vault" /> View Vault
+          {:else}
+            Login
+          {/if}
+        </a>
       </div>
     </div>
     <div>
-      <AccordionItem header="What is AstroFetch?">
+      <AccordionItem checked header="What is AstroFetch?">
         <p class="text-lg">
           AstroFetch is a side project built on Svelte and DaisyUI that allows
           you to seamlessly use NASA's Api without any hassle to view the
