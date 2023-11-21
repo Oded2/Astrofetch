@@ -9,6 +9,7 @@
     fetchFromEndpoint,
   } from "../../../hooks.client.js";
   import AstroCard from "$lib/components/AstroCard.svelte";
+  import Title from "$lib/Title.svelte";
   const minDate = "1995-06-16";
   const ogStart = dateToStr(dateAdjustDays(-30));
   const ogEnd = dateToStr();
@@ -120,3 +121,5 @@
     {/if}
   </div>
 </main>
+
+<Title title="Fetch" />
