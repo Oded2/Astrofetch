@@ -75,6 +75,13 @@ export function maxLen(string = "", maxLen = 200) {
   }
   return string;
 }
+
+export function arrayProp(arr = [], prop) {
+  const newArr = [];
+  for (const i of arr) newArr.push(i[prop]);
+  return newArr;
+}
+
 export function GetSortOrder(prop, reverse = false) {
   return function (a, b) {
     if (a[prop] > b[prop]) {

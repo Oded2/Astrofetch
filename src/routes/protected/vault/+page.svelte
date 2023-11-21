@@ -1,7 +1,7 @@
 <script>
   import AstroCard from "$lib/components/AstroCard.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
-  import { createToast, GetSortOrder } from "../../../hooks.client.js";
+  import { arrayProp, createToast } from "../../../hooks.client.js";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
@@ -9,7 +9,9 @@
   export let data;
   const { supabase, session } = data;
   let { items } = data;
-  items = items.sort(GetSortOrder("date"));
+  let sortBy = "date";
+  let reversed = true;
+  items = items.sort(GetSortOrderCustom("date", reversed));
   let toast;
   let progress = false;
   async function deleteFromVault(item = {}) {
@@ -27,6 +29,16 @@
     for (const i in items) if (items[i].data === item.data) items.splice(i, 1);
     items = items;
   }
+  function GetSortOrderCustom(prop, reverse = false) {
+    return function (a, b) {
+      if (a["data"][prop] > b["data"][prop]) {
+        return reverse ? -1 : 1;
+      } else if (a["data"][prop] < b["data"][prop]) {
+        return reverse ? 1 : -1;
+      }
+      return 0;
+    };
+  }
 </script>
 
 <main>
@@ -35,6 +47,28 @@
       <h1 class="text-6xl font-bold">
         Personal <span class="text-accent">Vault</span>
       </h1>
+    </div>
+    <div class="mb-7 d-flex justify-start">
+      <button
+        class="btn btn-accent me-2"
+        on:click={() => {
+          if (sortBy === "date") {
+            sortBy = "title";
+            items = items.sort(GetSortOrderCustom("title", !reversed));
+          } else if (sortBy === "title") {
+            sortBy = "date";
+            items = items.sort(GetSortOrderCustom("date", reversed));
+          }
+        }}
+        >Sort By {sortBy === "date" ? "Title" : "Date"}
+      </button>
+      <button
+        class="btn btn-secondary"
+        on:click={() => {
+          reversed = !reversed;
+          items = items.sort(GetSortOrderCustom(sortBy, reversed));
+        }}><i class="fa-solid fa-right-left" /></button
+      >
     </div>
     <AstroGridContainer>
       {#each items as item (item)}
