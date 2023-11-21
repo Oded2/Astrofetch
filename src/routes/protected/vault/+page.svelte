@@ -4,6 +4,7 @@
   import { createToast } from "../../../hooks.client.js";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
+  import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
   export let data;
   const { supabase, session } = data;
   let { items } = data;
@@ -27,13 +28,13 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10">
+  <div class="md:container mx-auto my-10">
     <div class="text-center mb-7">
       <h1 class="text-6xl font-bold">
         Personal <span class="text-accent">Vault</span>
       </h1>
     </div>
-    <div class="grid grid-cols-3 gap-8">
+    <AstroGridContainer>
       {#each items as item (item)}
         <div
           animate:flip={{ duration: 200 }}
@@ -65,7 +66,7 @@
           </AstroCard>
         </div>
       {/each}
-    </div>
+    </AstroGridContainer>
   </div>
 </main>
 

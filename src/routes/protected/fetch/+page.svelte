@@ -11,6 +11,7 @@
   import Title from "$lib/Title.svelte";
   import AstroCard from "$lib/components/AstroCard.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
+  import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
   export let data;
   const { supabase, session } = data;
   const minDate = "1995-06-16";
@@ -53,7 +54,7 @@
           >New Fetch</button
         >
       </div>
-      <div class="grid grid-cols-3 gap-8">
+      <AstroGridContainer>
         {#each items as item}
           <AstroCard
             on:duplicate={() =>
@@ -73,7 +74,7 @@
             {item}
           />
         {/each}
-      </div>
+      </AstroGridContainer>
     {:else}
       <form on:submit|preventDefault={submit}>
         <div class="flex justify-center">
