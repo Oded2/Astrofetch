@@ -87,7 +87,7 @@
           <a class="underline" href={hrefs.fetch}>fetch</a> button.
         </p>
       </AccordionItem>
-      <AccordionItem header="Contact" checked>
+      <AccordionItem header="Contact">
         <form on:submit|preventDefault={contact}>
           <div class="mb-4">
             <label for="email" class="card-title mb-2">Email</label>
