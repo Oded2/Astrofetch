@@ -21,7 +21,6 @@
   let toast;
   let start = ogStart;
   let end = ogEnd;
-  let notes = "";
   let progress = false;
   let fetchComplete = false;
   let items = [];
@@ -31,13 +30,19 @@
     fetchComplete = true;
     progress = false;
   }
-  function reset() {
-    start = ogStart;
-    end = ogEnd;
-    notes = "";
-  }
   function dateAdjustDays(days = 0, date = new Date(), max) {
     return dateAdjust(days * 24 * 60 * 60 * 1000, date, max);
+  }
+  function getRandomDate(startDate, endDate) {
+    const startTimestamp = new Date(startDate).getTime();
+    const endTimestamp = new Date(endDate).getTime();
+    const randomTimestamp =
+      startTimestamp + Math.random() * (endTimestamp - startTimestamp + 1); // +1 to include the end date
+    const randomDate = new Date(randomTimestamp);
+    const year = randomDate.getFullYear();
+    const month = String(randomDate.getMonth() + 1).padStart(2, "0");
+    const day = String(randomDate.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   }
 </script>
 
@@ -122,14 +127,26 @@
             </div>
             <div class="card-actions justify-around">
               <button
-                type="button"
-                class="btn btn-secondary px-10"
-                on:click={reset}>Reset</button
-              >
-              <button
                 type="submit"
                 disabled={progress}
-                class="btn btn-primary px-10">Submit</button
+                class="btn btn-primary w-full">Fetch</button
+              >
+              <button
+                type="button"
+                class="btn btn-secondary w-full"
+                disabled={start === ogStart && end === ogEnd}
+                on:click={() => {
+                  start = ogStart;
+                  end = ogEnd;
+                }}>Reset</button
+              >
+              <button
+                type="button"
+                class="btn btn-accent w-full"
+                on:click={() => {
+                  start = getRandomDate(minDate, dateToStr());
+                  end = dateToStr(dateAdjustDays(30, new Date(start)));
+                }}>Randomize</button
               >
             </div>
           </FormCard>
