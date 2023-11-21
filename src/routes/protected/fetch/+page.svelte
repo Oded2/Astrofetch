@@ -2,7 +2,6 @@
   import hrefs from "$lib/hrefs.json";
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
-  import sample from "./sample.json";
   import {
     dateAdjust,
     dateToStr,

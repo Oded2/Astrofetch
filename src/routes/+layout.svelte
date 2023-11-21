@@ -40,10 +40,3 @@
   </div>
 </div>
 <slot />
-
-<style>
-  :global(html) {
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
-  }
-</style>

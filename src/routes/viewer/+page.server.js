@@ -1,6 +1,5 @@
 import { NASA } from "$env/static/private";
 import { addParamsString } from "../../hooks.client.js";
-
 const apiUrl = "https://api.nasa.gov/planetary/apod";
 
 export async function load({ url }) {
