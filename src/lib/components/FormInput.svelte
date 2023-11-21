@@ -19,7 +19,7 @@
     type="email"
     {id}
     {placeholder}
-    class="input w-full max-w-xs"
+    class="input w-full"
     class:input-accent={(value.length == 0 || focus) &&
       value.length <= max &&
       !error}
@@ -38,7 +38,7 @@
     type="password"
     {id}
     {placeholder}
-    class="input w-full max-w-xs"
+    class="input w-full"
     class:input-accent={(value.length == 0 || focus) &&
       value.length <= max &&
       !error}
@@ -58,7 +58,7 @@
     type="date"
     {id}
     {placeholder}
-    class="input w-full max-w-xs"
+    class="input w-full"
     class:input-accent={(value === "" || focus) && value <= max && !error}
     class:input-error={value > max}
     bind:value
@@ -75,7 +75,7 @@
     type="number"
     {id}
     {placeholder}
-    class="input w-full max-w-xs"
+    class="input w-full"
     class:input-accent={(value.length == 0 || focus) &&
       value.length <= max &&
       !error}
@@ -115,7 +115,7 @@
     type="text"
     {id}
     {placeholder}
-    class="input w-full max-w-xs"
+    class="input w-full"
     class:input-accent={(value.length == 0 || focus) &&
       value.length <= max &&
       !error}
