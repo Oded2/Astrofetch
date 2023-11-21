@@ -12,9 +12,10 @@
 
   async function submit() {
     progress = true;
-    await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: "https://astrofetch.netlify.app/passwordreset",
     });
+    if (error) console.error(error);
     toast = createToast(
       "info",
       "Instructions sent.",
