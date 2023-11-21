@@ -1,12 +1,37 @@
 <script>
   import { addParamsString, formatDate, maxLen } from "../../hooks.client.js";
   import hrefs from "$lib/hrefs.json";
+  import { supabase as supabaseClient } from "$lib/supabaseClient.js";
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
   export let item = {};
+  export let supabase = supabaseClient;
+  export let userId = "";
+  let isSaved = false;
   function formatDateStr(str) {
     return formatDate(new Date(str));
   }
-  function vault() {
-    console.log("Saving to vault");
+  async function vault() {
+    isSaved = true;
+    const { data } = await supabase
+      .from("items")
+      .select()
+      .eq("data", JSON.stringify(item))
+      .eq("user_id", userId);
+    if (data.length > 0) {
+      dispatch("duplicate");
+      return;
+    }
+    const { error } = await supabase
+      .from("items")
+      .insert({ user_id: userId, data: item });
+
+    if (error) {
+      isSaved = false;
+      console.error(error.message);
+      return;
+    }
+    dispatch("success");
   }
 </script>
 
@@ -40,7 +65,7 @@
           class="btn btn-secondary w-24">View</a
         >
       {/if}
-      <button on:click={vault} class="btn btn-primary w-32"
+      <button disabled={isSaved} on:click={vault} class="btn btn-primary w-32"
         >Save to Vault</button
       >
     </div>

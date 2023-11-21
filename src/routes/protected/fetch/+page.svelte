@@ -3,26 +3,27 @@
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
   import {
+    createToast,
     dateAdjust,
     dateToStr,
     fetchFromEndpoint,
   } from "../../../hooks.client.js";
-  import AstroCard from "$lib/components/AstroCard.svelte";
   import Title from "$lib/Title.svelte";
+  import AstroCard from "$lib/components/AstroCard.svelte";
+  import ToastSetup from "$lib/components/ToastSetup.svelte";
+  export let data;
+  const { supabase, session } = data;
   const minDate = "1995-06-16";
   const ogStart = dateToStr(dateAdjustDays(-30));
   const ogEnd = dateToStr();
   const adjustOptions = [7, 30, 365];
+  let toast;
   let start = ogStart;
   let end = ogEnd;
   let notes = "";
   let inProgress = false;
   let fetchComplete = false;
   let items = [];
-  //   OP
-  //   items = sample;
-  //   fetchComplete = true;
-  // OP
   async function submit() {
     inProgress = true;
     items = await fetchFromEndpoint(hrefs.apiNasa, { start, end });
@@ -54,7 +55,23 @@
       </div>
       <div class="grid grid-cols-3 gap-8">
         {#each items as item}
-          <AstroCard {item} />
+          <AstroCard
+            on:duplicate={() =>
+              (toast = createToast(
+                "error",
+                "Duplicate",
+                "This item is already in your vault"
+              ))}
+            on:success={() =>
+              (toast = createToast(
+                "success",
+                "Added to Vault",
+                "This item has been added to your vault"
+              ))}
+            {supabase}
+            userId={session.user.id}
+            {item}
+          />
         {/each}
       </div>
     {:else}
@@ -120,5 +137,7 @@
     {/if}
   </div>
 </main>
+
+<ToastSetup {toast} />
 
 <Title title="Fetch" />
