@@ -2,6 +2,8 @@
   import AccordionItem from "$lib/components/AccordionItem.svelte";
   import hrefs from "$lib/hrefs.json";
   import Title from "$lib/Title.svelte";
+  export let data;
+  const { supabase } = data;
 </script>
 
 <main>
