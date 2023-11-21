@@ -4,7 +4,7 @@
   import FormInput from "$lib/components/FormInput.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { createToast } from "../../hooks.client.js";
-  import SignupCard from "../../lib/components/cards/SignupCard.svelte";
+  import FormCard from "$lib/components/FormCard.svelte";
   export let data;
   const { supabase } = data;
   let toast;
@@ -33,7 +33,7 @@
 <main>
   <div class="container mx-auto my-10">
     <div class="flex justify-center">
-      <SignupCard>
+      <FormCard>
         <form on:submit|preventDefault={submit}>
           <div class="mb-4">
             <label for="email" class="card-title mb-2">Email</label>
@@ -62,7 +62,7 @@
             >
           </div>
         </form>
-      </SignupCard>
+      </FormCard>
     </div>
   </div>
 </main>

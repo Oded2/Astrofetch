@@ -1,7 +1,7 @@
 <script>
+  import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
-  import SignupCard from "$lib/components/cards/SignupCard.svelte";
   import { createToast } from "../../hooks.client.js";
   export let data;
   const { supabase } = data;
@@ -67,7 +67,7 @@
   <div class="container mx-auto my-10">
     {#if isComplete}
       <div class="flex justify-center">
-        <SignupCard>
+        <FormCard>
           <div class="border-b pb-4">
             <h1 class="text-3xl text-center font-semibold">Account Created</h1>
           </div>
@@ -76,13 +76,13 @@
               >{email}</span
             >
           </div>
-        </SignupCard>
+        </FormCard>
       </div>
     {:else}
       <form on:submit|preventDefault={submit}>
         <div class="grid lg:grid-cols-2 gap-4">
           <div class="flex justify-center lg:justify-end">
-            <SignupCard>
+            <FormCard>
               <div class="mb-4">
                 <label for="email" class="card-title mb-2">Email</label>
                 <FormInput
@@ -124,10 +124,10 @@
                   Must be less than 50 characters.
                 </div>
               </div>
-            </SignupCard>
+            </FormCard>
           </div>
           <div class="flex justify-center lg:justify-start">
-            <SignupCard>
+            <FormCard>
               <div class="mb-4">
                 <label for="password" class="card-title mb-2">Password</label>
                 <FormInput
@@ -163,7 +163,7 @@
                   class="btn btn-primary text-lg w-full">Create Account</button
                 >
               </div>
-            </SignupCard>
+            </FormCard>
           </div>
         </div>
       </form>
