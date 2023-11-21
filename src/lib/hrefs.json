@@ -4,5 +4,6 @@
     "login": "/login",
     "fetch": "/protected/fetch",
     "vault": "/protected/vault",
-    "account": "/protected/account"
+    "account": "/protected/account",
+    "signout": "/signout"
 }

@@ -30,6 +30,7 @@
       <ul class="menu menu-horizontal px-1">
         {#if session}
           <NavLi {activeUrl} href={hrefs.account}>Account</NavLi>
+          <NavLi {activeUrl} href={hrefs.signout}>Sign Out</NavLi>
         {:else}
           <NavLi href={hrefs.signup} {activeUrl}>Sign Up</NavLi>
           <NavLi href={hrefs.login} {activeUrl}>Login</NavLi>
@@ -39,3 +40,10 @@
   </div>
 </div>
 <slot />
+
+<style>
+  :global(html) {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+  }
+</style>
