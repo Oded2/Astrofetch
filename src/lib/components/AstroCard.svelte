@@ -34,6 +34,7 @@
     <div class=" mt-3 card-actions justify-end">
       {#if item.media_type === "image"}
         <a
+          data-sveltekit-preload-data="off"
           href={addParamsString(hrefs.viewer, { date: item.date })}
           class="btn btn-secondary w-24">View</a
         >
