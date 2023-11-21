@@ -1,4 +1,5 @@
 <script>
+  import Title from "$lib/Title.svelte";
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
@@ -10,7 +11,7 @@
   let displayName = "";
   let password = "";
   let confirmPassword = "";
-  let inProgress = false;
+  let progress = false;
   let isComplete = false;
   let toast;
   $: validpass = password === confirmPassword;
@@ -19,10 +20,10 @@
       alert("Invalid Credentials");
       return;
     }
-    inProgress = true;
+    progress = true;
     if (!(await checkForUsername())) {
       toast = createToast("error", "Username unavailable");
-      inProgress = false;
+      progress = false;
       return;
     }
     await handleSignUp();
@@ -121,7 +122,7 @@
                   max="50"
                 />
                 <div class="mt-2 font-light text-sm">
-                  Must be less than 50 characters.
+                  Must be less than 50 characters long.
                 </div>
               </div>
             </FormCard>
@@ -139,7 +140,7 @@
                   max="50"
                 />
                 <div class="mt-2 font-light text-sm">
-                  Must be atleast 8 characters long.
+                  Must be between 8 to 50 characters long.
                 </div>
               </div>
               <div class="mb-4">
@@ -158,7 +159,7 @@
               </div>
               <div class="card-actions">
                 <button
-                  disabled={inProgress}
+                  disabled={progress}
                   type="submit"
                   class="btn btn-primary text-lg w-full">Create Account</button
                 >
@@ -172,3 +173,5 @@
 </main>
 
 <ToastSetup {toast} />
+
+<Title title="Sign Up" />

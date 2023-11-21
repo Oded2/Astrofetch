@@ -9,12 +9,12 @@
   const { session } = data;
   const formspree = "https://formspree.io/f/meqbwbjl";
   let toast;
-  let inProgress = false;
+  let progress = false;
   let email = session ? session.user.email : "";
   let name = "";
   let message = "";
   async function contact() {
-    inProgress = true;
+    progress = true;
     await fetch(formspree, {
       method: "POST",
       headers: {
@@ -27,7 +27,7 @@
         message,
       }),
     });
-    inProgress = false;
+    progress = false;
     toast = createToast("success", "Success", "Message sent successfully");
     message = "";
   }
@@ -122,7 +122,7 @@
           </div>
           <div class="card-actions justify-end">
             <button
-              disabled={inProgress}
+              disabled={progress}
               type="submit"
               class="btn btn-primary px-10">Submit</button
             >

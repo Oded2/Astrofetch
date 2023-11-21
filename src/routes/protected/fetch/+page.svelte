@@ -22,14 +22,14 @@
   let start = ogStart;
   let end = ogEnd;
   let notes = "";
-  let inProgress = false;
+  let progress = false;
   let fetchComplete = false;
   let items = [];
   async function submit() {
-    inProgress = true;
+    progress = true;
     items = await fetchFromEndpoint(hrefs.apiNasa, { start, end });
     fetchComplete = true;
-    inProgress = false;
+    progress = false;
   }
   function reset() {
     start = ogStart;
@@ -128,7 +128,7 @@
               >
               <button
                 type="submit"
-                disabled={inProgress}
+                disabled={progress}
                 class="btn btn-primary px-10">Submit</button
               >
             </div>

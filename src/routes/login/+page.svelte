@@ -5,16 +5,17 @@
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { createToast } from "../../hooks.client.js";
   import FormCard from "$lib/components/FormCard.svelte";
+  import Title from "$lib/Title.svelte";
   export let data;
   const { supabase } = data;
   let toast;
   let email = "";
   let password = "";
-  let inProgress = false;
+  let progress = false;
   async function submit() {
-    inProgress = true;
+    progress = true;
     const error = await handleLogin();
-    inProgress = false;
+    progress = false;
     if (error) {
       toast = createToast("error", "Error", error.message);
       return;
@@ -56,7 +57,7 @@
           </div>
           <div class="card-actions">
             <button
-              disabled={inProgress}
+              disabled={progress}
               type="submit"
               class="btn btn-primary text-lg w-full">Login</button
             >
@@ -68,3 +69,5 @@
 </main>
 
 <ToastSetup {toast} />
+
+<Title title="Login" />

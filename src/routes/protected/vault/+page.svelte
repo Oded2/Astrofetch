@@ -5,19 +5,20 @@
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
+  import Title from "$lib/Title.svelte";
   export let data;
   const { supabase, session } = data;
   let { items } = data;
   let toast;
-  let inProgress = false;
+  let progress = false;
   async function deleteFromVault(item = {}) {
-    inProgress = true;
+    progress = true;
     const { error } = await supabase
       .from("items")
       .delete()
       .eq("data", JSON.stringify(item.data))
       .eq("user_id", session.user.id);
-    inProgress = false;
+    progress = false;
     if (error) {
       console.error(error.message);
       return;
@@ -59,7 +60,7 @@
               ))}
           >
             <button
-              disabled={inProgress}
+              disabled={progress}
               class="btn btn-warning"
               on:click={() => deleteFromVault(item)}>Remove from Vault</button
             >
@@ -71,3 +72,5 @@
 </main>
 
 <ToastSetup {toast} />
+
+<Title title="Personal Vault" />
