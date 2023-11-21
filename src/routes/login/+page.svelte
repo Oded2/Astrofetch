@@ -54,6 +54,11 @@
               min="8"
               max="50"
             />
+            <div class="mt-2 font-light text-sm">
+              <a href={hrefs.forgotpassword} class="underline"
+                >Forgot Password?</a
+              >
+            </div>
           </div>
           <div class="card-actions">
             <button

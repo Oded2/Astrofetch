@@ -7,5 +7,7 @@
     "account": "/protected/account",
     "signout": "/signout",
     "viewer": "/viewer",
+    "forgotpassword": "/forgotpassword",
+    "passwordreset": "/protected/passwordreset",
     "apiNasa": "/apis/nasa"
 }
