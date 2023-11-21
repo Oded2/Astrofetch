@@ -3,5 +3,6 @@
     "signup": "/signup",
     "login": "/login",
     "fetch": "/protected/fetch",
-    "vault": "/protected/vault"
+    "vault": "/protected/vault",
+    "account": "/protected/account"
 }

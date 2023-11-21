@@ -9,7 +9,6 @@
   $: supabase = data.supabase;
   $: session = data.session;
   $: activeUrl = $page.url.pathname;
-
   onMount(() => {
     const {
       data: { subscription },
@@ -29,8 +28,12 @@
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
-        <NavLi href={hrefs.signup} {activeUrl}>Sign Up</NavLi>
-        <NavLi href={hrefs.login} {activeUrl}>Login</NavLi>
+        {#if session}
+          <NavLi {activeUrl} href={hrefs.account}>Account</NavLi>
+        {:else}
+          <NavLi href={hrefs.signup} {activeUrl}>Sign Up</NavLi>
+          <NavLi href={hrefs.login} {activeUrl}>Login</NavLi>
+        {/if}
       </ul>
     </div>
   </div>
