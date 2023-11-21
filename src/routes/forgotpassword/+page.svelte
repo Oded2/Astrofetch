@@ -19,7 +19,7 @@
       "info",
       "Instructions sent.",
       `A link with the instructions for resetting your password has been sent to ${email}. Email may take a couple moments to arrive.`,
-      20000
+      10000
     );
   }
 </script>
