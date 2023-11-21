@@ -35,7 +35,7 @@
         </div>
         {#if item.media_type === "image"}
           <img
-            class="max-w-2xl rounded-2xl shadow-2xl"
+            class="rounded-2xl shadow-2xl max-w-full"
             src={item.url}
             alt={item.title}
           />
