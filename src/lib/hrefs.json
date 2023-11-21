@@ -8,6 +8,6 @@
     "signout": "/signout",
     "viewer": "/viewer",
     "forgotpassword": "/forgotpassword",
-    "passwordreset": "/protected/passwordreset",
+    "passwordreset": "/passwordreset",
     "apiNasa": "/apis/nasa"
 }
