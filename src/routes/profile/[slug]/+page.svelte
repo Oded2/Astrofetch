@@ -77,39 +77,41 @@
         }}><i class="fa-solid fa-right-left" /></button
       >
     </div>
-    <AstroGridContainer>
-      {#each items as item (item)}
-        <div
-          animate:flip={{ duration: 200 }}
-          transition:fade={{ duration: 200 }}
-        >
-          <AstroCard
-            isPersonal
-            {supabase}
-            userId={session.user.id}
-            item={item.data}
-            on:duplicate={() =>
-              (toast = createToast(
-                "error",
-                "Duplicate",
-                "This item is already in your vault"
-              ))}
-            on:success={() =>
-              (toast = createToast(
-                "success",
-                "Added to Vault",
-                "This item has been added to your vault"
-              ))}
+    <div class="border-b border-b-gray-600 pb-9">
+      <AstroGridContainer>
+        {#each items as item (item)}
+          <div
+            animate:flip={{ duration: 200 }}
+            transition:fade={{ duration: 200 }}
           >
-            <button
-              disabled={progress}
-              class="btn btn-warning"
-              on:click={() => deleteFromVault(item)}>Remove from Vault</button
+            <AstroCard
+              isPersonal
+              {supabase}
+              userId={session ? session.user.id : ""}
+              item={item.data}
+              on:duplicate={() =>
+                (toast = createToast(
+                  "error",
+                  "Duplicate",
+                  "This item is already in your vault"
+                ))}
+              on:success={() =>
+                (toast = createToast(
+                  "success",
+                  "Added to Vault",
+                  "This item has been added to your vault"
+                ))}
             >
-          </AstroCard>
-        </div>
-      {/each}
-    </AstroGridContainer>
+              <button
+                disabled={progress}
+                class="btn btn-warning"
+                on:click={() => deleteFromVault(item)}>Remove from Vault</button
+              >
+            </AstroCard>
+          </div>
+        {/each}
+      </AstroGridContainer>
+    </div>
   </div>
 </main>
 
