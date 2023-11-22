@@ -52,6 +52,6 @@
     max-height: 90vh;
   }
   div.h-custom {
-    height: 36rem;
+    height: 32rem;
   }
 </style>

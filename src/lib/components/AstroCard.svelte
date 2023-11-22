@@ -70,7 +70,7 @@
         <a
           target="_blank"
           data-sveltekit-preload-data="off"
-          href={addParamsString(hrefs.viewer, { date: item.date })}
+          href={addParamsString(hrefs.viewer, item)}
           class="btn btn-secondary w-24">View</a
         >
       {/if}
