@@ -7,7 +7,7 @@
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { goto } from "$app/navigation";
   export let data;
-  const { session } = data;
+  const { session, username } = data;
   const formspree = "https://formspree.io/f/meqbwbjl";
   let toast;
   let progress = false;
@@ -65,7 +65,7 @@
 
       <div>
         <a
-          href={session ? hrefs.vault : hrefs.login}
+          href={session ? hrefs.profile.replace("slug", username) : hrefs.login}
           class="btn btn-secondary btn-lg w-full shadow-xl"
         >
           {#if session}
