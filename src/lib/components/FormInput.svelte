@@ -20,7 +20,7 @@
     {id}
     {placeholder}
     class="input w-full max-w-xs"
-    class:input-accent={(value.length == 0 || focus) &&
+    class:input-accent={((value.length == 0 && required) || focus) &&
       value.length <= max &&
       !error}
     class:input-error={value.length > max}
@@ -39,7 +39,7 @@
     {id}
     {placeholder}
     class="input w-full max-w-xs"
-    class:input-accent={(value.length == 0 || focus) &&
+    class:input-accent={((value.length == 0 && required) || focus) &&
       value.length <= max &&
       !error}
     class:input-error={value.length > max || error}
@@ -59,7 +59,9 @@
     {id}
     {placeholder}
     class="input w-full max-w-xs"
-    class:input-accent={(value === "" || focus) && value <= max && !error}
+    class:input-accent={((value === "" && required) || focus) &&
+      value <= max &&
+      !error}
     class:input-error={value > max}
     bind:value
     on:focus={() => (focus = true)}
@@ -76,7 +78,7 @@
     {id}
     {placeholder}
     class="input w-full max-w-xs"
-    class:input-accent={(value.length == 0 || focus) &&
+    class:input-accent={((value.length == 0 && required) || focus) &&
       value.length <= max &&
       !error}
     class:input-error={value > max}
@@ -97,7 +99,7 @@
     class="textarea w-full resize-none text-base"
     {rows}
     {cols}
-    class:textarea-accent={(value.length == 0 || focus) &&
+    class:textarea-accent={((value.length == 0 && required) || focus) &&
       value.length <= max &&
       !error}
     class:textarea-error={value.length > max}
@@ -116,7 +118,7 @@
     {id}
     {placeholder}
     class="input w-full max-w-xs"
-    class:input-accent={(value.length == 0 || focus) &&
+    class:input-accent={((value.length == 0 && required) || focus) &&
       value.length <= max &&
       !error}
     class:input-error={value.length > max}
