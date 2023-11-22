@@ -98,7 +98,10 @@
               <button
                 type="submit"
                 disabled={email === ogEmail || progress}
-                class="btn btn-primary w-full">Change Email</button
+                class="btn btn-primary w-full mb-2">Change Email</button
+              >
+              <a href={hrefs.passwordreset} class="btn btn-secondary w-full"
+                >Reset Password</a
               >
             </div>
           </form>
