@@ -1,7 +1,7 @@
 <script>
   import AstroCard from "$lib/components/AstroCard.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
-  import { createToast } from "../../../hooks.client.js";
+  import { createToast, calculateMinutes } from "../../../hooks.client.js";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
@@ -39,6 +39,11 @@
       return 0;
     };
   }
+  function calculateAgeStr(str = "") {
+    const date = new Date(str);
+    const minutes = calculateMinutes(date, new Date());
+    return Math.floor(minutes / 60 / 24 / 365.25);
+  }
 </script>
 
 <main>
@@ -48,6 +53,7 @@
         {`${profile.display_name}'s`} <span class="text-accent">Vault</span>
       </h1>
       <h4 class="text-xl">{profile.bio}</h4>
+      <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
     </div>
     <div class="mb-7 d-flex justify-start">
       <button

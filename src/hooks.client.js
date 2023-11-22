@@ -92,3 +92,9 @@ export function GetSortOrder(prop, reverse = false) {
     return 0;
   };
 }
+
+export function calculateMinutes(startDate = new Date(), endDate = new Date()) {
+  const timeDifference = endDate.valueOf() - startDate.valueOf();
+  const minutes = Math.floor(timeDifference / 60000);
+  return minutes;
+}
