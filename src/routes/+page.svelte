@@ -87,6 +87,7 @@
           id="search"
           placeholder="Username"
           required
+          max="50"
           bind:value={userSearch}
         />
         <div class="mt-3">
