@@ -5,6 +5,7 @@
   import Title from "$lib/Title.svelte";
   import { createToast } from "../hooks.client.js";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
+  import { goto } from "$app/navigation";
   export let data;
   const { session } = data;
   const formspree = "https://formspree.io/f/meqbwbjl";
@@ -13,6 +14,7 @@
   let email = session ? session.user.email : "";
   let name = "";
   let message = "";
+  let userSearch = "";
   async function contact() {
     progress = true;
     await fetch(formspree, {
@@ -30,6 +32,10 @@
     progress = false;
     toast = createToast("success", "Success", "Message sent successfully");
     message = "";
+  }
+  function gotoProgress(href = "") {
+    progress = true;
+    goto(href);
   }
 </script>
 
@@ -69,6 +75,28 @@
           {/if}
         </a>
       </div>
+    </div>
+    <div class="bg-gray-900 p-4 rounded-xl mb-10">
+      <form
+        on:submit|preventDefault={() =>
+          gotoProgress(hrefs.profile.replace("slug", userSearch))}
+      >
+        <label for="search" class="card-title mb-2">Profile Search</label>
+        <FormInput
+          type="text"
+          id="search"
+          placeholder="Username"
+          required
+          bind:value={userSearch}
+        />
+        <div class="mt-3">
+          <button
+            type="submit"
+            disabled={progress}
+            class="btn btn-primary w-full max-w-xs">Search</button
+          >
+        </div>
+      </form>
     </div>
     <div>
       <AccordionItem checked header="What is AstroFetch?">

@@ -9,5 +9,6 @@
     "viewer": "/viewer",
     "forgotpassword": "/forgotpassword",
     "passwordreset": "/protected/passwordreset",
+    "profile": "/profile/slug",
     "apiNasa": "/apis/nasa"
 }
