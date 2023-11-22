@@ -45,7 +45,7 @@
         username,
         display_name: displayName,
         bio,
-        birthday: dob,
+        birthday: dob.length == 0 ? null : dob,
       })
       .eq("user_id", session.user.id);
     progress = false;
@@ -140,6 +140,10 @@
             <div class="mb-4">
               <label for="dob" class="card-title mb-2">Birthday</label>
               <FormInput id="dob" type="date" max={today} bind:value={dob} />
+              <div class="mt-2 font-light text-sm">
+                Note: your birthday will be public. If you wish to, you can
+                leave it empty.
+              </div>
             </div>
             <div class="card-actions">
               <button
