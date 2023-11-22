@@ -136,6 +136,9 @@
             <div class="mb-4">
               <label for="bio" class="card-title mb-2">Bio</label>
               <FormInput id="bio" type="text" max="150" bind:value={bio} />
+              <div class="mt-2 font-light text-sm">
+                {`${bio.length}/150`}
+              </div>
             </div>
             <div class="mb-4">
               <label for="dob" class="card-title mb-2">Birthday</label>
