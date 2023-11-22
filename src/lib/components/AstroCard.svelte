@@ -8,6 +8,7 @@
   export let supabase = supabaseClient;
   export let userId = "";
   export let isPersonal = false;
+  export let progress = false;
   let isSaved = false;
   function formatDateStr(str) {
     return formatDate(new Date(str));
@@ -58,7 +59,13 @@
     <h3 class="font-semibold">{formatDateStr(item.date)}</h3>
     <p>{maxLen(item.explanation)}</p>
     <div class="mt-3 card-actions justify-end">
-      <slot />
+      {#if isPersonal}
+        <button
+          disabled={progress}
+          class="btn btn-warning"
+          on:click={() => dispatch("delete")}>Remove from Vault</button
+        >
+      {/if}
       {#if item.media_type === "image" || item.media_type === "video"}
         <a
           target="_blank"
@@ -67,7 +74,7 @@
           class="btn btn-secondary w-24">View</a
         >
       {/if}
-      {#if !isPersonal}
+      {#if !isPersonal && userId.length > 0}
         <button disabled={isSaved} on:click={vault} class="btn btn-primary w-32"
           >Save to Vault</button
         >

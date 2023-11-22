@@ -85,10 +85,11 @@
             transition:fade={{ duration: 200 }}
           >
             <AstroCard
-              isPersonal
+              isPersonal={session ? session.user.id === profile.user_id : false}
               {supabase}
               userId={session ? session.user.id : ""}
               item={item.data}
+              {progress}
               on:duplicate={() =>
                 (toast = createToast(
                   "error",
@@ -101,13 +102,8 @@
                   "Added to Vault",
                   "This item has been added to your vault"
                 ))}
-            >
-              <button
-                disabled={progress}
-                class="btn btn-warning"
-                on:click={() => deleteFromVault(item)}>Remove from Vault</button
-              >
-            </AstroCard>
+              on:delete={() => deleteFromVault(item)}
+            />
           </div>
         {/each}
       </AstroGridContainer>
@@ -117,4 +113,4 @@
 
 <ToastSetup {toast} />
 
-<Title title="Personal Vault" />
+<Title title={`${profile.display_name}'s Vault`} />
