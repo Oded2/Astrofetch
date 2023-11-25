@@ -7,7 +7,6 @@
   function formatDateStr(str = "") {
     return formatDate(new Date(str));
   }
-  console.log(item);
 </script>
 
 <main class="bg-gray-950">
