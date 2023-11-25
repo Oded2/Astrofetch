@@ -1,5 +1,10 @@
 <script>
-  import { addParamsString, formatDate, maxLen } from "../../hooks.client.js";
+  import {
+    addParamsString,
+    formatDate,
+    formatDateTime,
+    maxLen,
+  } from "../../hooks.client.js";
   import hrefs from "$lib/hrefs.json";
   import { supabase as supabaseClient } from "$lib/supabaseClient.js";
   import { createEventDispatcher } from "svelte";
@@ -9,6 +14,7 @@
   export let userId = "";
   export let isPersonal = false;
   export let progress = false;
+  export let dateVaulted = "";
   let isSaved = false;
   function formatDateStr(str) {
     return formatDate(new Date(str));
@@ -56,7 +62,13 @@
   </figure>
   <div class="card-body">
     <h2 class="card-title font-bold">{item.title}</h2>
-    <h3 class="font-semibold">{formatDateStr(item.date)}</h3>
+    <h3 class="font-semibold text-lg">{formatDateStr(item.date)}</h3>
+    {#if dateVaulted.length > 0}
+      <h4 class="font-semibold">
+        <span class="font-medium">Vaulted:</span>
+        {formatDateTime(new Date(dateVaulted))}
+      </h4>
+    {/if}
     <p>{maxLen(item.explanation)}</p>
     <div class="mt-3 card-actions justify-end">
       {#if isPersonal}

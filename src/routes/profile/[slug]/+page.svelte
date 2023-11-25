@@ -1,7 +1,11 @@
 <script>
   import AstroCard from "$lib/components/AstroCard.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
-  import { createToast, calculateMinutes } from "../../../hooks.client.js";
+  import {
+    createToast,
+    calculateMinutes,
+    GetSortOrder,
+  } from "../../../hooks.client.js";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
@@ -10,8 +14,8 @@
   const { supabase, session, profile } = data;
   let { items } = data;
   let sortBy = "date";
-  let reversed = true;
-  items = items.sort(GetSortOrderCustom("date", reversed));
+  let reversed = false;
+  items = items.sort(GetSortOrderCustom("date", true));
   let toast;
   let progress = false;
   async function deleteFromVault(item = {}) {
@@ -59,27 +63,38 @@
         <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
       {/if}
     </div>
-    <div class="mb-7 d-flex justify-start">
-      <button
-        class="btn btn-accent me-2"
-        on:click={() => {
-          if (sortBy === "date") {
-            sortBy = "title";
-            items = items.sort(GetSortOrderCustom("title", !reversed));
-          } else if (sortBy === "title") {
-            sortBy = "date";
-            items = items.sort(GetSortOrderCustom("date", reversed));
-          }
-        }}
-        >Sort By {sortBy === "date" ? "Title" : "Date"}
-      </button>
-      <button
-        class="btn btn-secondary"
-        on:click={() => {
-          reversed = !reversed;
-          items = items.sort(GetSortOrderCustom(sortBy, reversed));
-        }}><i class="fa-solid fa-right-left" /></button
-      >
+    <div class="mb-7 flex justify-start">
+      <div class="mr-2">
+        <label class="flex mb-2 font-bold text-xl" for="sort">Sort</label>
+        <select
+          bind:value={sortBy}
+          on:change={() => {
+            if (sortBy === "date")
+              items.sort(GetSortOrderCustom("date", !reversed));
+            else if (sortBy === "dateAdded")
+              items.sort(GetSortOrder("created_at", !reversed));
+            else if (sortBy === "title")
+              items.sort(GetSortOrderCustom("title", reversed));
+            items = items;
+          }}
+          id="sort"
+          class="select select-bordered w-full max-w-xs"
+        >
+          <option value="date" selected>Date</option>
+          <option value="dateAdded">Date Added</option>
+          <option value="title">Title</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <label for="reversed" class="flex mb-2 font-bold text-xl">Reverse</label
+        >
+        <input
+          type="checkbox"
+          bind:checked={reversed}
+          on:change={() => (items = items.reverse())}
+          class="checkbox ml-2"
+        />
+      </div>
     </div>
     <div class="border-b border-b-gray-600 pb-9">
       <AstroGridContainer>
@@ -93,6 +108,7 @@
               {supabase}
               userId={session ? session.user.id : ""}
               item={item.data}
+              dateVaulted={item.created_at}
               {progress}
               on:duplicate={() =>
                 (toast = createToast(

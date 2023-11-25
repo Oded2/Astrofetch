@@ -98,3 +98,14 @@ export function calculateMinutes(startDate = new Date(), endDate = new Date()) {
   const minutes = Math.floor(timeDifference / 60000);
   return minutes;
 }
+
+export function getTimeStr(date = new Date()) {
+  return `${date.getHours().toString().padStart(2, "0")}:${date
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+export function formatDateTime(date = new Date(), options = dateOptions) {
+  return `${formatDate(date, options)} at ${getTimeStr(date)}`;
+}
