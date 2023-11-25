@@ -15,6 +15,7 @@
 
   export let data;
   const { supabase, session } = data;
+  const formspree = "https://formspree.io/f/meqbwbjl";
   let username = "";
   onMount(async () => {
     if (!session) return;
@@ -24,7 +25,7 @@
       .eq("user_id", session.user.id);
     username = data[0].username;
   });
-  const formspree = "https://formspree.io/f/meqbwbjl";
+
   let toast;
   let progress = false;
   let email = session ? session.user.email : "";
