@@ -7,6 +7,8 @@
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
+  import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
+  import Card from "$lib/components/Card.svelte";
   export let data;
   const { supabase, session } = data;
   let username = "";
@@ -110,7 +112,7 @@
         </div>
       </form>
     </div>
-    <div>
+    <div class="mb-10">
       <AccordionItem checked header="What is AstroFetch?">
         <p class="text-lg">
           AstroFetch is a side project built on Svelte and DaisyUI that allows
@@ -169,6 +171,28 @@
           </div>
         </form>
       </AccordionItem>
+    </div>
+    <div class="bg-gray-900 rounded-xl p-5">
+      <h1 class="text-4xl font-bold">Features</h1>
+      <div class="my-5">
+        <AstroGridContainer>
+          <Card
+            title="Easy to Use"
+            ,
+            description="Seamlessly browse the daily photos by simply logging in."
+          ></Card>
+          <Card
+            title="Immersive Image Viewer"
+            ,
+            description="Explore and share images even further with the built in image viewer."
+          ></Card>
+          <Card
+            title="100% Free"
+            ,
+            description="Explore the universe for hours without worrying about any annoying paywalls."
+          ></Card>
+        </AstroGridContainer>
+      </div>
     </div>
   </div>
 </main>
