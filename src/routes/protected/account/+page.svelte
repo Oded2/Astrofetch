@@ -65,6 +65,31 @@
       "Your AstroFetch profile has been successfully updated"
     );
   }
+
+  async function purgeVault() {
+    if (
+      !confirm(
+        "Purging your vault means deleting ALL of your saved items. This action is NOT reversible. Are you sure you want to continue?"
+      )
+    )
+      return;
+    progress = true;
+    const { error } = await supabase
+      .from("items")
+      .delete()
+      .eq("user_id", session.user.id);
+    progress = false;
+    if (error) {
+      console.error(error.message);
+      return;
+    }
+    toast = createToast(
+      "success",
+      "Vault Purged",
+      "Your AstroFetch vault has been purged."
+    );
+  }
+
   function verifyProfile() {
     return (
       username.length > 0 &&
@@ -78,96 +103,106 @@
 
 <main>
   <div class="container mx-auto my-10">
-    <div class="grid md:grid-cols-2 gap-4">
-      <div class="flex justify-center lg:justify-end">
-        <FormCard>
-          <form on:submit|preventDefault={changeEmail}>
-            <div class="mb-4">
-              <h1 class="font-bold text-xl">Account Settings</h1>
+    <div class="grid md:grid-cols-3 gap-4 place-items-center">
+      <FormCard>
+        <form on:submit|preventDefault={changeEmail}>
+          <div class="mb-4">
+            <h1 class="font-bold text-xl">Account Settings</h1>
+          </div>
+          <div class="mb-4">
+            <label for="email" class="card-title mb-2">Email</label>
+            <FormInput
+              type="email"
+              bind:value={email}
+              required
+              placeholder="someone@domain.com"
+            />
+          </div>
+          <div class="card-actions">
+            <button
+              type="submit"
+              disabled={email === ogEmail || progress}
+              class="btn btn-primary w-full mb-2">Change Email</button
+            >
+            <a href={hrefs.passwordreset} class="btn btn-secondary w-full"
+              >Reset Password</a
+            >
+          </div>
+        </form>
+      </FormCard>
+      <FormCard>
+        <form on:submit|preventDefault={updateProfile}>
+          <div class="mb-4">
+            <h1 class="font-bold text-xl">Profile Settings</h1>
+          </div>
+          <div class="mb-4">
+            <label for="username" class="card-title mb-2">Username</label>
+            <FormInput
+              id="username"
+              type="text"
+              required
+              max="50"
+              bind:value={username}
+            />
+          </div>
+          <div class="mb-4">
+            <label for="display" class="card-title mb-2">Display Name</label>
+            <FormInput
+              id="username"
+              type="text"
+              required
+              max="50"
+              bind:value={displayName}
+            />
+          </div>
+          <div class="mb-4">
+            <label for="bio" class="card-title mb-2">Bio</label>
+            <FormInput id="bio" type="text" max="150" bind:value={bio} />
+            <div class="mt-2 font-light text-sm">
+              {`${bio.length}/150`}
             </div>
-            <div class="mb-4">
-              <label for="email" class="card-title mb-2">Email</label>
-              <FormInput
-                type="email"
-                bind:value={email}
-                required
-                placeholder="someone@domain.com"
-              />
-            </div>
-            <div class="card-actions">
-              <button
-                type="submit"
-                disabled={email === ogEmail || progress}
-                class="btn btn-primary w-full mb-2">Change Email</button
-              >
-              <a href={hrefs.passwordreset} class="btn btn-secondary w-full"
-                >Reset Password</a
-              >
-            </div>
-          </form>
-        </FormCard>
-      </div>
-      <div class="flex justify-center lg:justify-start">
-        <FormCard>
-          <form on:submit|preventDefault={updateProfile}>
-            <div class="mb-4">
-              <h1 class="font-bold text-xl">Profile Settings</h1>
-            </div>
-            <div class="mb-4">
-              <label for="username" class="card-title mb-2">Username</label>
-              <FormInput
-                id="username"
-                type="text"
-                required
-                max="50"
-                bind:value={username}
-              />
-            </div>
-            <div class="mb-4">
-              <label for="display" class="card-title mb-2">Display Name</label>
-              <FormInput
-                id="username"
-                type="text"
-                required
-                max="50"
-                bind:value={displayName}
-              />
-            </div>
-            <div class="mb-4">
-              <label for="bio" class="card-title mb-2">Bio</label>
-              <FormInput id="bio" type="text" max="150" bind:value={bio} />
-              <div class="mt-2 font-light text-sm">
-                {`${bio.length}/150`}
-              </div>
-            </div>
-            <div class="mb-4">
-              <label for="dob" class="card-title mb-2">Birthday</label>
-              <FormInput id="dob" type="date" max={today} bind:value={dob} />
+          </div>
+          <div class="mb-4">
+            <label for="dob" class="card-title mb-2">Birthday</label>
+            <FormInput id="dob" type="date" max={today} bind:value={dob} />
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div class="mt-2 font-light text-sm">
+              Note: your birthday will be public. If you wish to, you can
               <!-- svelte-ignore a11y-click-events-have-key-events -->
-              <!-- svelte-ignore a11y-no-static-element-interactions -->
-              <div class="mt-2 font-light text-sm">
-                Note: your birthday will be public. If you wish to, you can
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <span
-                  class="underline cursor-pointer hover:opacity-90 transition-all"
-                  on:click={() => (dob = "")}>leave it empty.</span
-                >
-              </div>
-            </div>
-            <div class="card-actions">
-              <button
-                disabled={(ogUsername === username &&
-                  ogDisplayName === displayName &&
-                  ogBio === bio &&
-                  ogDob === dob) ||
-                  progress}
-                type="submit"
-                class="btn btn-primary w-full">Update Profile</button
+              <span
+                class="underline cursor-pointer hover:opacity-90 transition-all"
+                on:click={() => (dob = "")}>leave it empty.</span
               >
             </div>
-          </form>
-        </FormCard>
-      </div>
+          </div>
+          <div class="card-actions">
+            <button
+              disabled={(ogUsername === username &&
+                ogDisplayName === displayName &&
+                ogBio === bio &&
+                ogDob === dob) ||
+                progress}
+              type="submit"
+              class="btn btn-primary w-full">Update Profile</button
+            >
+          </div>
+        </form>
+      </FormCard>
+      <FormCard>
+        <div class="mb-4">
+          <h1 class="font-bold text-xl">Vault Settings</h1>
+        </div>
+
+        <div class="card-actions">
+          <button
+            on:click={purgeVault}
+            disabled={progress}
+            type="button"
+            class="btn btn-error w-full">Purge Vault</button
+          >
+        </div>
+      </FormCard>
     </div>
   </div>
 </main>

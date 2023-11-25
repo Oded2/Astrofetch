@@ -8,7 +8,6 @@ export default {
     themes: [
       "light",
       "dark",
-      "cupcake",
       {
         mytheme: {
           primary: "#6000ff",
@@ -27,7 +26,7 @@ export default {
 
           warning: "#d57b00",
 
-          error: "#ff0034",
+          error: "#b91c1c",
         },
       },
     ],
