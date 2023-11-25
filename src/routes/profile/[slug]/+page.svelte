@@ -63,8 +63,8 @@
         <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
       {/if}
     </div>
-    <div class="mb-7 flex justify-start">
-      <div class="mr-2">
+    <div class="mb-7 flex flex-col justify-start">
+      <div class="mb-4">
         <label class="flex mb-2 font-bold text-xl" for="sort">Sort</label>
         <select
           bind:value={sortBy}
@@ -85,15 +85,14 @@
           <option value="title">Title</option>
         </select>
       </div>
-      <div class="form-control">
-        <label for="reversed" class="flex mb-2 font-bold text-xl">Reverse</label
-        >
+      <div class="flex">
         <input
           type="checkbox"
           bind:checked={reversed}
           on:change={() => (items = items.reverse())}
-          class="checkbox ml-2"
+          class="checkbox mr-2"
         />
+        <label for="reversed" class="flex font-bold text-xl">Reverse</label>
       </div>
     </div>
     <div class="border-b border-b-gray-600 pb-9">
