@@ -9,6 +9,10 @@
   import { onMount } from "svelte";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
   import Card from "$lib/components/Card.svelte";
+  import sample1 from "$lib/images/med_sample1.png";
+  import sample2 from "$lib/images/med_sample2.png";
+  import sample3 from "$lib/images/med_sample3.png";
+
   export let data;
   const { supabase, session } = data;
   let username = "";
@@ -173,22 +177,25 @@
       </AccordionItem>
     </div>
     <div class="bg-gray-900 rounded-xl p-5">
-      <h1 class="text-4xl font-bold">Features</h1>
+      <h1 class="text-4xl font-bold mb-2">Features</h1>
+      <h3 class="text-lg">
+        Explore the various features that AstroFetch has to offer.
+      </h3>
       <div class="my-5">
         <AstroGridContainer>
           <Card
             title="Easy to Use"
-            ,
+            image={sample1}
             description="Seamlessly browse the daily photos by simply logging in."
           ></Card>
           <Card
             title="Immersive Image Viewer"
-            ,
+            image={sample2}
             description="Explore and share images even further with the built in image viewer."
           ></Card>
           <Card
             title="100% Free"
-            ,
+            image={sample3}
             description="Explore the universe for hours without worrying about any annoying paywalls."
           ></Card>
         </AstroGridContainer>

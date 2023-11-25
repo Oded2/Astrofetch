@@ -4,17 +4,23 @@
   export let description = "";
 </script>
 
-<div class="card bg-secondary shadow-xl image-full">
+<div class="card bg-secondary shadow-xl image-full h-full">
   {#if image.length > 0}
     <figure>
-      <img class="aspect-square" src={image} alt={title} />
+      <img class="aspect-square transition-all" src={image} alt={title} />
     </figure>
   {/if}
   <div class="card-body">
-    <h2 class="card-title underline underline-offset-4">{title}</h2>
-    <p>{description}</p>
+    <h2 class="card-title">{title}</h2>
+    <p class="text-xl">{description}</p>
     <div class="card-actions justify-end">
       <slot />
     </div>
   </div>
 </div>
+
+<style>
+  .card:hover img {
+    scale: 110%;
+  }
+</style>
