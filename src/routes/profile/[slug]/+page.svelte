@@ -52,8 +52,12 @@
       <h1 class="text-6xl font-bold mb-2">
         {`${profile.display_name}'s`} <span class="text-accent">Vault</span>
       </h1>
-      <h4 class="text-xl">{profile.bio}</h4>
-      <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
+      {#if profile.bio.length > 0}
+        <h4 class="text-xl">{profile.bio}</h4>
+      {/if}
+      {#if profile.birthday}
+        <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
+      {/if}
     </div>
     <div class="mb-7 d-flex justify-start">
       <button
