@@ -23,9 +23,9 @@
             <h2 class="text-xl">&copy; {item.copyright}</h2>
           {/if}
           {#if item.media_type === "video"}
-            <div class="h-custom">
+            <div class="h-custom mt-6">
               <iframe
-                class="w-full h-full"
+                class="w-full h-full rounded-lg"
                 src={item.url}
                 title={item.title}
                 frameborder="0"
