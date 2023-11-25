@@ -130,8 +130,14 @@
               <button
                 type="submit"
                 disabled={progress}
-                class="btn btn-primary w-full">Fetch</button
+                class="btn btn-primary w-full"
               >
+                {#if progress}
+                  <span class="loading loading-spinner loading-lg"></span>
+                {:else}
+                  Fetch
+                {/if}
+              </button>
               <button
                 type="button"
                 class="btn btn-secondary w-full"
