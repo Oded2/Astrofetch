@@ -7,7 +7,7 @@
 <div class="card bg-secondary shadow-xl image-full h-full">
   {#if image.length > 0}
     <figure>
-      <img class="aspect-square transition-all" src={image} alt={title} />
+      <img class="aspect-square" src={image} alt={title} />
     </figure>
   {/if}
   <div class="card-body">
@@ -18,9 +18,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .card:hover img {
-    scale: 110%;
-  }
-</style>
