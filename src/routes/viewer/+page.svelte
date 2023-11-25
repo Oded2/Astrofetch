@@ -7,6 +7,7 @@
   function formatDateStr(str = "") {
     return formatDate(new Date(str));
   }
+  console.log(item);
 </script>
 
 <main class="bg-gray-950">
@@ -35,7 +36,7 @@
         </div>
         {#if item.media_type === "image"}
           <img
-            class="rounded-2xl shadow-2xl md:max-w-screen-md hover:scale-110 transition-all"
+            class="rounded-2xl shadow-2xl md:max-w-screen-sm hover:scale-110 transition-all"
             src={item.url}
             alt={item.title}
           />
