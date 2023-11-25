@@ -143,9 +143,15 @@
             <div class="mb-4">
               <label for="dob" class="card-title mb-2">Birthday</label>
               <FormInput id="dob" type="date" max={today} bind:value={dob} />
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <!-- svelte-ignore a11y-no-static-element-interactions -->
               <div class="mt-2 font-light text-sm">
                 Note: your birthday will be public. If you wish to, you can
-                leave it empty.
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <span
+                  class="underline cursor-pointer hover:opacity-90 transition-all"
+                  on:click={() => (dob = "")}>leave it empty.</span
+                >
               </div>
             </div>
             <div class="card-actions">
