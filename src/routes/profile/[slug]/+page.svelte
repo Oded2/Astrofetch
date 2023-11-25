@@ -63,9 +63,9 @@
         <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
       {/if}
     </div>
-    <div class="mb-7 flex flex-col justify-start">
-      <div class="mb-4">
-        <label class="flex mb-2 font-bold text-xl" for="sort">Sort</label>
+    <div class="mb-7">
+      <label class="flex mb-2 font-bold text-xl" for="sort">Sort</label>
+      <div>
         <select
           bind:value={sortBy}
           on:change={() => {
@@ -84,11 +84,10 @@
           <option value="dateAdded">Date Added</option>
           <option value="title">Title</option>
         </select>
-      </div>
-      <div>
+
         <button
           type="button"
-          class="btn btn-secondary"
+          class="btn btn-secondary ml-1"
           title="Reverse"
           on:click={() => {
             reversed = !reversed;
