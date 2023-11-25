@@ -6,8 +6,18 @@
   import { createToast } from "../hooks.client.js";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
   export let data;
-  const { session, username } = data;
+  const { supabase, session } = data;
+  let username = "";
+  onMount(async () => {
+    if (!session) return;
+    const { data } = await supabase
+      .from("profiles")
+      .select("username")
+      .eq("user_id", session.user.id);
+    username = data[0].username;
+  });
   const formspree = "https://formspree.io/f/meqbwbjl";
   let toast;
   let progress = false;
@@ -67,6 +77,7 @@
         <a
           href={session ? hrefs.profile.replace("slug", username) : hrefs.login}
           class="btn btn-secondary btn-lg w-full shadow-xl"
+          class:btn-disabled={username.length == 0}
         >
           {#if session}
             <i class="fa-solid fa-vault" /> View Vault
