@@ -77,7 +77,7 @@
         <a
           href={session ? hrefs.profile.replace("slug", username) : hrefs.login}
           class="btn btn-secondary btn-lg w-full shadow-xl"
-          class:btn-disabled={username.length == 0}
+          class:btn-disabled={username.length == 0 && session}
         >
           {#if session}
             <i class="fa-solid fa-vault" /> View Vault
