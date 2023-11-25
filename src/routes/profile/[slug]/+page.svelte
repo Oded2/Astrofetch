@@ -85,14 +85,18 @@
           <option value="title">Title</option>
         </select>
       </div>
-      <div class="flex">
-        <input
-          type="checkbox"
-          bind:checked={reversed}
-          on:change={() => (items = items.reverse())}
-          class="checkbox mr-2"
-        />
-        <label for="reversed" class="flex font-bold text-xl">Reverse</label>
+      <div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          title="Reverse"
+          on:click={() => {
+            reversed = !reversed;
+            items = items.reverse();
+          }}
+        >
+          <i class="fa-solid fa-right-left"></i>
+        </button>
       </div>
     </div>
     <div class="border-b border-b-gray-600 pb-9">
