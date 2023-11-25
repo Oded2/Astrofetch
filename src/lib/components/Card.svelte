@@ -4,7 +4,7 @@
   export let description = "";
 </script>
 
-<div class="card bg-secondary shadow-xl image-full h-full">
+<div class="card shadow-xl image-full h-full">
   {#if image.length > 0}
     <figure>
       <img class="aspect-square" src={image} alt={title} />
