@@ -39,14 +39,13 @@ export function createToast(
 }
 
 export async function fetchFromEndpoint(ref = "", params = {}) {
-  const response = await fetch(ref, {
+  return await fetch(ref, {
     method: "POST",
     body: JSON.stringify(params),
     headers: {
       "content-type": "application/json",
     },
   });
-  return await response.json();
 }
 export function hasNormalCharacters(inputString = "") {
   return inputString.length == 0 ? true : /^[a-zA-Z0-9]+$/.test(inputString);

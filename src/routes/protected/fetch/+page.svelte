@@ -26,7 +26,8 @@
   let items = [];
   async function submit() {
     progress = true;
-    items = await fetchFromEndpoint(hrefs.apiNasa, { start, end });
+    const response = await fetchFromEndpoint(hrefs.apiNasa, { start, end });
+    items = await response.json();
     fetchComplete = true;
     progress = false;
   }
