@@ -7,7 +7,11 @@
 <div class="card shadow-xl image-full h-full">
   {#if image.length > 0}
     <figure>
-      <img class="aspect-square" src={image} alt={title} />
+      <img
+        class="aspect-square object-cover h-full w-full"
+        src={image}
+        alt={title}
+      />
     </figure>
   {/if}
   <div class="card-body">
