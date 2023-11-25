@@ -8,7 +8,7 @@
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
-  import Card from "$lib/components/Card.svelte";
+  import HomeCard from "$lib/components/HomeCard.svelte";
   import sample1 from "$lib/images/med_sample1.png";
   import sample2 from "$lib/images/med_sample2.png";
   import sample3 from "$lib/images/med_sample3.png";
@@ -183,21 +183,21 @@
       </h3>
       <div class="my-5">
         <AstroGridContainer>
-          <Card
+          <HomeCard
             title="Easy to Use"
             image={sample1}
             description="Seamlessly browse the daily photos by simply logging in."
-          ></Card>
-          <Card
+          ></HomeCard>
+          <HomeCard
             title="Immersive Image Viewer"
             image={sample2}
             description="Explore and share images even further with the built in image viewer."
-          ></Card>
-          <Card
+          ></HomeCard>
+          <HomeCard
             title="100% Free"
             image={sample3}
             description="Explore the universe for hours without worrying about any annoying paywalls."
-          ></Card>
+          ></HomeCard>
         </AstroGridContainer>
       </div>
     </div>
