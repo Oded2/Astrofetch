@@ -35,7 +35,7 @@
         </div>
         {#if item.media_type === "image"}
           <img
-            class="rounded-2xl shadow-2xl max-w-full"
+            class="rounded-2xl shadow-2xl max-w-screen-md hover:scale-110 transition-all"
             src={item.url}
             alt={item.title}
           />
