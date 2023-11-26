@@ -13,11 +13,19 @@
   export let data;
   const { supabase, session, profile } = data;
   let { items } = data;
+  const maxItems = 12;
+  const pageBreakpoint = 5;
+  const maxPage = parseInt(
+    items.length / maxItems + (items.length % maxItems != 0 ? 1 : 0)
+  );
+  console.log(maxPage);
+  let currentPage = 1;
   let sortBy = "date";
   let reversed = false;
   items = items.sort(GetSortOrderCustom("date", true));
   let toast;
   let progress = false;
+  $: divider = parseInt((currentPage - 1) / pageBreakpoint) * pageBreakpoint;
   async function deleteFromVault(item = {}) {
     progress = true;
     const { error } = await supabase
@@ -98,34 +106,69 @@
         </button>
       </div>
     </div>
+    {#if items.length > maxItems}
+      <div class="mb-7">
+        <div class="join">
+          <button
+            class="join-item btn btn-secondary"
+            disabled={currentPage == 1}
+            on:click={() => currentPage--}>&laquo;</button
+          >
+          {#each { length: maxPage + (maxPage > pageBreakpoint ? pageBreakpoint % maxPage : 0) } as _, index}
+            {#if divider + pageBreakpoint >= index + 1 && index + 1 > divider}
+              <button
+                class="join-item btn btn-secondary"
+                class:btn-active={index + 1 == currentPage}
+                disabled={index + 1 > maxPage}
+                on:click={() => (currentPage = index + 1)}
+                >{index + 1 <= maxPage ? index + 1 : "-"}
+              </button>
+            {/if}
+          {/each}
+          <button
+            class="join-item btn btn-secondary"
+            disabled={currentPage == maxPage}
+            on:click={() => currentPage++}>&raquo;</button
+          >
+        </div>
+      </div>
+    {/if}
     <div class="border-b border-b-gray-600 pb-9">
       <AstroGridContainer>
-        {#each items as item (item)}
+        {#each items as item, index (item)}
           <div
+            class:absolute={!(
+              index < currentPage * maxItems &&
+              index >= currentPage * maxItems - maxItems
+            )}
             animate:flip={{ duration: 200 }}
             transition:fade={{ duration: 200 }}
           >
-            <AstroCard
-              isPersonal={session ? session.user.id === profile.user_id : false}
-              {supabase}
-              userId={session ? session.user.id : ""}
-              item={item.data}
-              dateVaulted={item.created_at}
-              {progress}
-              on:duplicate={() =>
-                (toast = createToast(
-                  "error",
-                  "Duplicate",
-                  "This item is already in your vault"
-                ))}
-              on:success={() =>
-                (toast = createToast(
-                  "success",
-                  "Added to Vault",
-                  "This item has been added to your vault"
-                ))}
-              on:delete={() => deleteFromVault(item)}
-            />
+            {#if index < currentPage * maxItems && index >= currentPage * maxItems - maxItems}
+              <AstroCard
+                isPersonal={session
+                  ? session.user.id === profile.user_id
+                  : false}
+                {supabase}
+                userId={session ? session.user.id : ""}
+                item={item.data}
+                dateVaulted={item.created_at}
+                {progress}
+                on:duplicate={() =>
+                  (toast = createToast(
+                    "error",
+                    "Duplicate",
+                    "This item is already in your vault"
+                  ))}
+                on:success={() =>
+                  (toast = createToast(
+                    "success",
+                    "Added to Vault",
+                    "This item has been added to your vault"
+                  ))}
+                on:delete={() => deleteFromVault(item)}
+              />
+            {/if}
           </div>
         {/each}
       </AstroGridContainer>
