@@ -87,8 +87,10 @@
         >
       {/if}
       {#if !isPersonal && userId.length > 0}
-        <button disabled={isSaved} on:click={vault} class="btn btn-primary w-32"
-          >Save to Vault</button
+        <button
+          disabled={isSaved}
+          on:click={vault}
+          class="btn btn-primary w-full sm:w-32">Save to Vault</button
         >
       {/if}
     </div>
