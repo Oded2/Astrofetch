@@ -9,7 +9,7 @@
   }
 </script>
 
-<main class="bg-gray-950">
+<main>
   <div class="container mx-auto">
     <div class="hero min-h-screen">
       <div class="hero-content flex-col xl:flex-row">
@@ -47,7 +47,11 @@
 
 <Title title={item.title} />
 
-<style>
+<style lang="postcss">
+  :global(body) {
+    background-color: theme(colors.gray.950);
+  }
+
   img {
     max-height: 90vh;
   }
