@@ -1,5 +1,6 @@
 <script>
   import Title from "$lib/Title.svelte";
+  import Container from "$lib/components/Container.svelte";
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
@@ -102,7 +103,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10">
+  <Container>
     <div class="grid md:grid-cols-3 gap-4 place-items-center">
       <FormCard>
         <form on:submit|preventDefault={changeEmail}>
@@ -204,7 +205,7 @@
         </div>
       </FormCard>
     </div>
-  </div>
+  </Container>
 </main>
 
 <ToastSetup {toast} />

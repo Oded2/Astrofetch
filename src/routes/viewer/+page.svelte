@@ -1,5 +1,6 @@
 <script>
   import Title from "$lib/Title.svelte";
+  import Container from "$lib/components/Container.svelte";
   import { formatDate } from "../../hooks.client.js";
 
   export let data;
@@ -10,7 +11,7 @@
 </script>
 
 <main class="bg-gray-950">
-  <div class="container mx-auto">
+  <Container margin={false} padding={false}>
     <div class="hero min-h-screen">
       <div class="hero-content flex-col xl:flex-row">
         <div class="text-center xl:text-left">
@@ -42,7 +43,7 @@
         {/if}
       </div>
     </div>
-  </div>
+  </Container>
 </main>
 
 <Title title={item.title} />

@@ -10,6 +10,7 @@
   import { flip } from "svelte/animate";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
   import Title from "$lib/Title.svelte";
+  import Container from "$lib/components/Container.svelte";
   export let data;
   const { supabase, session, profile } = data;
   let { items } = data;
@@ -58,7 +59,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10">
+  <Container>
     <div class="text-center mb-7">
       <h1 class="text-6xl font-bold mb-2">
         {`${profile.display_name}'s`} <span class="text-accent">Vault</span>
@@ -172,7 +173,7 @@
         {/each}
       </AstroGridContainer>
     </div>
-  </div>
+  </Container>
 </main>
 
 <ToastSetup {toast} />

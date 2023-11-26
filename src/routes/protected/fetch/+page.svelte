@@ -12,6 +12,7 @@
   import AstroCard from "$lib/components/AstroCard.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
+  import Container from "$lib/components/Container.svelte";
   export let data;
   const { supabase, session } = data;
   const minDate = "1995-06-16";
@@ -48,7 +49,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10">
+  <Container>
     <div class="text-center mb-7">
       <h1 class="text-6xl font-bold">
         Astro<span class="text-accent">Fetch</span>
@@ -161,7 +162,7 @@
         </div>
       </form>
     {/if}
-  </div>
+  </Container>
 </main>
 
 <ToastSetup {toast} />

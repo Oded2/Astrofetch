@@ -6,6 +6,7 @@
   import { supabase } from "$lib/supabaseClient.js";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { createToast } from "../../hooks.client.js";
+  import Container from "$lib/components/Container.svelte";
   let toast;
   let progress = false;
   let email = "";
@@ -13,7 +14,7 @@
   async function submit() {
     progress = true;
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://astrofetch.netlify.app/protected/passwordreset",
+      redirectTo: location.origin + hrefs.passwordreset,
     });
     if (error) console.error(error);
     toast = createToast(
@@ -26,7 +27,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10">
+  <Container>
     <div class="flex justify-center">
       <form on:submit|preventDefault={submit}>
         <FormCard>
@@ -48,7 +49,7 @@
         </FormCard>
       </form>
     </div>
-  </div>
+  </Container>
 </main>
 
 <ToastSetup {toast} />

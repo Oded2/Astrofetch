@@ -12,6 +12,7 @@
   import sample1 from "$lib/images/med_sample1.png";
   import sample2 from "$lib/images/med_sample2.png";
   import sample3 from "$lib/images/med_sample3.png";
+  import Container from "$lib/components/Container.svelte";
 
   export let data;
   const { supabase, session } = data;
@@ -57,7 +58,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-20">
+  <Container>
     <div class="w-full text-center mb-10">
       <h1 class="text-7xl font-semibold mb-6">
         Explore the <span class="text-accent">Universe</span>
@@ -203,7 +204,7 @@
         </AstroGridContainer>
       </div>
     </div>
-  </div>
+  </Container>
 </main>
 
 <ToastSetup {toast} />

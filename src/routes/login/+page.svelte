@@ -1,4 +1,5 @@
 <script>
+  import Container from "./../../lib/components/Container.svelte";
   import hrefs from "$lib/hrefs.json";
   import { goto } from "$app/navigation";
   import FormInput from "$lib/components/FormInput.svelte";
@@ -32,7 +33,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10">
+  <Container>
     <div class="flex justify-center">
       <FormCard>
         <form on:submit|preventDefault={submit}>
@@ -70,7 +71,7 @@
         </form>
       </FormCard>
     </div>
-  </div>
+  </Container>
 </main>
 
 <ToastSetup {toast} />

@@ -1,5 +1,6 @@
 <script>
   import Title from "$lib/Title.svelte";
+  import Container from "$lib/components/Container.svelte";
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
@@ -65,7 +66,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10">
+  <Container>
     {#if isComplete}
       <div class="flex justify-center">
         <FormCard>
@@ -169,7 +170,7 @@
         </div>
       </form>
     {/if}
-  </div>
+  </Container>
 </main>
 
 <ToastSetup {toast} />
