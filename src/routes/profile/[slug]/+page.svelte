@@ -51,7 +51,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10">
+  <div class="container mx-auto my-10 px-3 sm:px-0">
     <div class="text-center mb-7">
       <h1 class="text-6xl font-bold mb-2">
         {`${profile.display_name}'s`} <span class="text-accent">Vault</span>
@@ -64,7 +64,7 @@
       {/if}
     </div>
     <div class="mb-7">
-      <label class="flex mb-2 font-bold text-xl" for="sort">Sort</label>
+      <label class="sm:flex mb-2 font-bold text-xl" for="sort">Sort</label>
       <div>
         <select
           bind:value={sortBy}
@@ -87,7 +87,7 @@
 
         <button
           type="button"
-          class="btn btn-secondary ml-1"
+          class="btn btn-secondary sm:ml-1 mt-2"
           title="Reverse"
           on:click={() => {
             reversed = !reversed;
