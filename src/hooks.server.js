@@ -22,7 +22,7 @@ export const handle = async ({ event, resolve }) => {
   if (event.url.pathname.startsWith("/protected")) {
     const session = await event.locals.getSession();
     if (!session) {
-      throw redirect(303, hrefs.login);
+      throw redirect(301, hrefs.login);
     }
   }
 
