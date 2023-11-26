@@ -1,5 +1,5 @@
 export function load({ url }) {
-  let item = {};
+  const item = {};
   url.searchParams.forEach((value, key) => (item[key] = value));
   return { item };
 }
