@@ -47,7 +47,7 @@
   <figure>
     {#if item.media_type === "image"}
       <img
-        class="aspect-square sm:hover:scale-110 transition object-cover"
+        class="aspect-square sm:hover:scale-110 transition object-cover w-full"
         src={item.url}
         alt={item.title}
       />
