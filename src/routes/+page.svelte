@@ -121,9 +121,9 @@
     <div class="mb-10">
       <AccordionItem checked header="What is AstroFetch?">
         <p class="text-lg">
-          AstroFetch is a side project built on Svelte and DaisyUI that allows
-          you to seamlessly use NASA's Api without any hassle to view the
-          Astronomy Picture of the Day (APOD) and save them to your vault.
+          AstroFetch is a project built on Svelte and DaisyUI that allows you to
+          seamlessly use NASA's Api without any hassle to view the Astronomy
+          Picture of the Day (APOD) and save them to your vault.
         </p>
       </AccordionItem>
       <AccordionItem header="How do I use AstroFetch?">
