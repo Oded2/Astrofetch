@@ -1,4 +1,5 @@
 <script>
+  import hrefs from "$lib/hrefs.json";
   import Title from "$lib/Title.svelte";
   import Container from "$lib/components/Container.svelte";
   import FormCard from "$lib/components/FormCard.svelte";
@@ -38,7 +39,7 @@
     } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: `${location.origin}/auth/callback` },
+      options: { emailRedirectTo: location.origin + hrefs.apiAuth },
     });
     await supabase.from("profiles").insert({
       user_id: id,

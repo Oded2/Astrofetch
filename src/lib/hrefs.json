@@ -9,5 +9,6 @@
     "forgotpassword": "/forgotpassword",
     "passwordreset": "/protected/passwordreset",
     "profile": "/profile/slug",
+    "apiAuth": "/apis/auth/callback",
     "apiNasa": "/apis/nasa"
 }
