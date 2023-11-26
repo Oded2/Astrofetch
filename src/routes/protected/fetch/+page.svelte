@@ -7,6 +7,7 @@
     dateAdjust,
     dateToStr,
     fetchFromEndpoint,
+    formatDate,
   } from "../../../hooks.client.js";
   import Title from "$lib/Title.svelte";
   import AstroCard from "$lib/components/AstroCard.svelte";
@@ -25,6 +26,9 @@
   let progress = false;
   let fetchComplete = false;
   let items = [];
+  function formatDateStr(str = "") {
+    return formatDate(new Date(str), { month: "long", day: "numeric" });
+  }
   async function submit() {
     progress = true;
     const response = await fetchFromEndpoint(hrefs.apiNasa, { start, end });
@@ -56,9 +60,14 @@
       </h1>
     </div>
     {#if fetchComplete}
-      <div class="mb-5">
+      <div class="mb-3">
         <button class="btn btn-primary" on:click={() => (fetchComplete = false)}
           >New Fetch</button
+        >
+      </div>
+      <div class="mb-5">
+        <span class="font-bold"
+          >{formatDateStr(start)} to {formatDateStr(end)}</span
         >
       </div>
       <AstroGridContainer>
