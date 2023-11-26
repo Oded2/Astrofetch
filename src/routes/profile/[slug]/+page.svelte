@@ -18,7 +18,6 @@
   const maxPage = parseInt(
     items.length / maxItems + (items.length % maxItems != 0 ? 1 : 0)
   );
-  console.log(maxPage);
   let currentPage = 1;
   let sortBy = "date";
   let reversed = false;

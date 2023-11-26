@@ -17,7 +17,7 @@
   const minDate = "1995-06-16";
   const ogStart = dateToStr(dateAdjustDays(-30));
   const ogEnd = dateToStr();
-  const adjustOptions = [7, 30, 365];
+  const adjustOptions = [7, 30, 100];
   let toast;
   let start = ogStart;
   let end = ogEnd;
@@ -73,7 +73,8 @@
               (toast = createToast(
                 "success",
                 "Added to Vault",
-                "This item has been added to your vault"
+                "This item has been added to your vault",
+                3000
               ))}
             {supabase}
             userId={session.user.id}
