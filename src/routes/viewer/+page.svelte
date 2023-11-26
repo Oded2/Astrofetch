@@ -58,9 +58,11 @@
     >
   </div>
   <div class="mb-6">
-    <a href={item.url} target="_blank" class="btn btn-secondary w-full mb-3"
-      >Open Image</a
-    >
+    {#if item.media_type === "image"}
+      <a href={item.url} target="_blank" class="btn btn-secondary w-full mb-3"
+        >Open Image</a
+      >
+    {/if}
     <a
       href="data:text;charset=utf-8,{item.explanation}"
       download="{item.title} Explanation.txt"
