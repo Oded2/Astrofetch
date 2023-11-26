@@ -40,6 +40,7 @@
           <div class="mb-4">
             <label for="email" class="card-title mb-2">Email</label>
             <FormInput
+              id="email"
               required
               bind:value={email}
               type="email"
@@ -49,6 +50,7 @@
           <div class="mb-4">
             <label for="password" class="card-title mb-2">Password</label>
             <FormInput
+              id="password"
               required
               bind:value={password}
               type="password"
