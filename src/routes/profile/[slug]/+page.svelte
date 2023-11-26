@@ -51,7 +51,7 @@
 </script>
 
 <main>
-  <div class="container mx-auto my-10 px-3 sm:px-0">
+  <div class="container mx-auto my-10">
     <div class="text-center mb-7">
       <h1 class="text-6xl font-bold mb-2">
         {`${profile.display_name}'s`} <span class="text-accent">Vault</span>
