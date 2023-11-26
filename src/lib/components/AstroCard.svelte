@@ -74,7 +74,7 @@
       {#if isPersonal}
         <button
           disabled={progress}
-          class="btn btn-warning"
+          class="btn btn-warning w-full sm:w-auto"
           on:click={() => dispatch("delete")}>Remove from Vault</button
         >
       {/if}
@@ -83,7 +83,7 @@
           target="_blank"
           data-sveltekit-preload-data="off"
           href={addParamsString(hrefs.viewer, item)}
-          class="btn btn-secondary w-24">View</a
+          class="btn btn-secondary w-full sm:w-24">View</a
         >
       {/if}
       {#if !isPersonal && userId.length > 0}
