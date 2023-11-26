@@ -26,10 +26,16 @@
   let progress = false;
   let fetchComplete = false;
   let items = [];
+
+  function verify() {
+    return start < end;
+  }
+
   function formatDateStr(str = "") {
     return formatDate(new Date(str), { month: "long", day: "numeric" });
   }
   async function submit() {
+    if (!verify()) return;
     progress = true;
     const response = await fetchFromEndpoint(hrefs.apiNasa, { start, end });
     items = await response.json();
@@ -103,6 +109,7 @@
                 required
                 id="start"
                 bind:value={start}
+                error={start > end}
                 min={minDate}
                 max={dateToStr()}
               />
