@@ -18,7 +18,7 @@
     const error = await handleLogin();
     progress = false;
     if (error) {
-      toast = createToast("error", "Error", error.message);
+      toast = createToast("error", "Error", error.message, 5000);
       return;
     }
     goto(hrefs.home);

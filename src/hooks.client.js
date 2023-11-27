@@ -24,7 +24,7 @@ export function createToast(
   type,
   title,
   description = "",
-  duration = 3000,
+  duration = 2000,
   placement = "bottom-center"
 ) {
   return toasts.add({
