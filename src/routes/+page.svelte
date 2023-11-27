@@ -6,11 +6,11 @@
   import { addParamsString, createToast } from "../hooks.client.js";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { goto } from "$app/navigation";
-  import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
   import HomeCard from "$lib/components/HomeCard.svelte";
   import sample1 from "$lib/images/med_sample1.png";
   import sample2 from "$lib/images/med_sample2.png";
   import sample3 from "$lib/images/med_sample3.png";
+  import sample4 from "$lib/images/med_sample4.png";
   import Container from "$lib/components/Container.svelte";
 
   export let data;
@@ -189,7 +189,7 @@
         Explore the various features that AstroFetch has to offer.
       </h3>
       <div class="my-5">
-        <AstroGridContainer>
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
           <HomeCard
             title="Easy to Use"
             image={sample1}
@@ -205,7 +205,12 @@
             image={sample3}
             description="Explore the universe for hours without worrying about any annoying paywalls."
           ></HomeCard>
-        </AstroGridContainer>
+          <HomeCard
+            title="Share Your Favorites"
+            image={sample4}
+            description="Share your vault full of your saved pictures to anyone, at anytime."
+          ></HomeCard>
+        </div>
       </div>
     </div>
   </Container>
