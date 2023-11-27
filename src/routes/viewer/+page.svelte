@@ -29,23 +29,25 @@
             >Options</label
           >
         </div>
-        <div class="mb-10">
-          {#if item.media_type === "video"}
-            <iframe
-              class="rounded-lg lg:max-w-screen-sm aspect-video"
-              src={item.url}
-              title={item.title}
-              frameborder="0"
-            />
-          {/if}
-          {#if item.media_type === "image"}
-            <img
-              class="rounded-2xl shadow-2xl lg:max-w-screen-sm sm:hover:scale-110 transition-all"
-              src={item.url}
-              alt={item.title}
-            />
-          {/if}
-        </div>
+        {#if item.media_type === "image" || item.media_type === "video"}
+          <div class="mb-10">
+            {#if item.media_type === "video"}
+              <iframe
+                class="rounded-lg lg:max-w-screen-sm aspect-video"
+                src={item.url}
+                title={item.title}
+                frameborder="0"
+              />
+            {/if}
+            {#if item.media_type === "image"}
+              <img
+                class="rounded-2xl shadow-2xl lg:max-w-screen-sm sm:hover:scale-110 transition-all"
+                src={item.url}
+                alt={item.title}
+              />
+            {/if}
+          </div>
+        {/if}
       </div>
     </div>
   </Container>
