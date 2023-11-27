@@ -89,8 +89,7 @@
               (toast = createToast(
                 "success",
                 "Added to Vault",
-                "This item has been added to your vault",
-                3000
+                "This item has been added to your vault"
               ))}
             {supabase}
             userId={session.user.id}
