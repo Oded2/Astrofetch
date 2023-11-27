@@ -62,7 +62,7 @@
     class:input-accent={((value === "" && required) || focus) &&
       value <= max &&
       !error}
-    class:input-error={value > max || error}
+    class:input-error={value < min || value > max || error}
     bind:value
     on:focus={() => (focus = true)}
     on:blur={() => {
