@@ -30,7 +30,7 @@
           >
         </div>
         {#if item.media_type === "image" || item.media_type === "video"}
-          <div class="mb-10">
+          <div class="mb-10 sm:mb-0">
             {#if item.media_type === "video"}
               <iframe
                 class="rounded-lg lg:max-w-screen-sm aspect-video"
