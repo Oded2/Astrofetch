@@ -105,11 +105,8 @@
 <main>
   <Container>
     <div class="grid md:grid-cols-3 gap-4 place-items-center">
-      <FormCard>
+      <FormCard title="Account Settings">
         <form on:submit|preventDefault={changeEmail}>
-          <div class="mb-4">
-            <h1 class="font-bold text-xl">Account Settings</h1>
-          </div>
           <div class="mb-4">
             <label for="email" class="card-title mb-2">Email</label>
             <FormInput
@@ -131,11 +128,8 @@
           </div>
         </form>
       </FormCard>
-      <FormCard>
+      <FormCard title="Profile Settings">
         <form on:submit|preventDefault={updateProfile}>
-          <div class="mb-4">
-            <h1 class="font-bold text-xl">Profile Settings</h1>
-          </div>
           <div class="mb-4">
             <label for="username" class="card-title mb-2">Username</label>
             <FormInput
@@ -190,11 +184,7 @@
           </div>
         </form>
       </FormCard>
-      <FormCard>
-        <div class="mb-4">
-          <h1 class="font-bold text-xl">Vault Settings</h1>
-        </div>
-
+      <FormCard title="Vault Settings">
         <div class="card-actions">
           <button
             on:click={purgeVault}
