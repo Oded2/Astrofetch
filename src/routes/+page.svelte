@@ -67,34 +67,30 @@
         Search a photo from any date hassle free, on AstroFetch
       </h2>
     </div>
-    <div class="md:grid grid-cols-2 gap-24 mb-10 px-5 md:px-0">
-      <div>
-        <a
-          href={session ? hrefs.fetch : hrefs.signup}
-          class="btn btn-primary btn-lg w-full mb-5 shadow-xl"
-        >
-          {#if session}
-            <i class="fa-solid fa-rss" /> New Fetch
-          {:else}
-            Create Account
-          {/if}
-        </a>
-      </div>
+    <div class="sm:grid grid-cols-2 gap-24 mb-10 px-5 sm:px-0">
+      <a
+        href={session ? hrefs.fetch : hrefs.signup}
+        class="btn btn-primary btn-lg w-full mb-5 shadow-xl"
+      >
+        {#if session}
+          <i class="fa-solid fa-rss" /> New Fetch
+        {:else}
+          Create Account
+        {/if}
+      </a>
 
-      <div>
-        <a
-          href={session ? hrefs.profile.replace("slug", username) : hrefs.login}
-          class="btn btn-secondary btn-lg w-full shadow-xl"
-          class:btn-disabled={username.length == 0 && session}
-          class:skeleton={username.length == 0 && session}
-        >
-          {#if session}
-            <i class="fa-solid fa-vault" /> View Vault
-          {:else}
-            Login
-          {/if}
-        </a>
-      </div>
+      <a
+        href={session ? hrefs.profile.replace("slug", username) : hrefs.login}
+        class="btn btn-secondary btn-lg w-full shadow-xl"
+        class:btn-disabled={username.length == 0 && session}
+        class:skeleton={username.length == 0 && session}
+      >
+        {#if session}
+          <i class="fa-solid fa-vault" /> View Vault
+        {:else}
+          Login
+        {/if}
+      </a>
     </div>
     <div class="bg-gray-900 p-4 rounded-xl mb-10">
       <form
