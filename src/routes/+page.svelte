@@ -74,6 +74,7 @@
       </a>
 
       <a
+        data-sveltekit-reload
         href={session
           ? addParamsString(hrefs.profileUID, { user_id: session.user.id })
           : hrefs.login}
