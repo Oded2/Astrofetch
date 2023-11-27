@@ -43,7 +43,7 @@
   }
 </script>
 
-<div class="h-full max-h-screen card bg-gray-900 shadow-xl">
+<div class="h-full card bg-gray-900 shadow-xl">
   <figure>
     {#if item.media_type === "image"}
       <img
@@ -96,3 +96,9 @@
     </div>
   </div>
 </div>
+
+<style>
+  div.card {
+    max-height: 95vh;
+  }
+</style>
