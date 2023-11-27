@@ -31,6 +31,7 @@
   let progress = false;
   let email = session ? session.user.email : "";
   let name = "";
+  let topic = "";
   let message = "";
   let userSearch = "";
   async function contact() {
@@ -43,12 +44,14 @@
       },
       body: JSON.stringify({
         email,
+        topic,
         name,
         message,
       }),
     });
     progress = false;
     toast = createToast("success", "Success", "Message sent successfully");
+    topic = "";
     message = "";
   }
   function gotoProgress(href = "") {
@@ -158,12 +161,23 @@
             />
           </div>
           <div class="mb-4">
+            <label for="topic" class="card-title mb-2">Topic</label>
+            <FormInput
+              type="text"
+              id="topic"
+              placeholder="The topic of your message"
+              required
+              bind:value={topic}
+            />
+          </div>
+          <div class="mb-4">
             <label for="message" class="card-title mb-2">Message</label>
             <FormInput
               type="textarea"
               rows="3"
               cols="0"
               required
+              placeholder="Type your message here"
               id="message"
               bind:value={message}
             />
