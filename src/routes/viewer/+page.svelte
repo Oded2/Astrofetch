@@ -28,20 +28,18 @@
           <label class="btn btn-neutral print:invisible" for="options"
             >Options</label
           >
-          {#if item.media_type === "video"}
-            <div class="h-custom mt-6">
-              <iframe
-                class="w-full h-full rounded-lg"
-                src={item.url}
-                title={item.title}
-                frameborder="0"
-              />
-            </div>
-          {/if}
         </div>
+        {#if item.media_type === "video"}
+          <iframe
+            class="rounded-lg lg:max-w-screen-sm aspect-video"
+            src={item.url}
+            title={item.title}
+            frameborder="0"
+          />
+        {/if}
         {#if item.media_type === "image"}
           <img
-            class="rounded-2xl shadow-2xl lg:max-w-screen-md sm:hover:scale-110 transition-all"
+            class="rounded-2xl shadow-2xl lg:max-w-screen-sm sm:hover:scale-110 transition-all"
             src={item.url}
             alt={item.title}
           />
@@ -77,9 +75,10 @@
 
 <style>
   img {
-    max-height: 90vh;
+    max-height: 95vh;
   }
-  div.h-custom {
-    height: 32rem;
+  iframe {
+    height: 300px;
+    width: auto;
   }
 </style>
