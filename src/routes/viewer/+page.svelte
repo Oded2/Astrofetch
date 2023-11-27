@@ -25,7 +25,9 @@
           {#if item.copyright}
             <h2 class="text-xl mb-2">&copy; {item.copyright}</h2>
           {/if}
-          <label class="btn btn-neutral" for="options">Options</label>
+          <label class="btn btn-neutral print:invisible" for="options"
+            >Options</label
+          >
           {#if item.media_type === "video"}
             <div class="h-custom mt-6">
               <iframe
