@@ -57,7 +57,8 @@
         Explore the <span class="text-accent">Universe</span>
       </h1>
       <h2 class="text-lg">
-        Search a photo from any date hassle free, on AstroFetch
+        Explore various Astronomy Picture of the Day throughout the years
+        seamlessly.
       </h2>
     </div>
     <div class="sm:grid grid-cols-2 gap-24 mb-10 px-5 sm:px-0">
