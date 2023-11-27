@@ -38,7 +38,18 @@
     if (!verify()) return;
     progress = true;
     const response = await fetchFromEndpoint(hrefs.apiNasa, { start, end });
-    items = await response.json();
+    const temp = await response.json();
+    if (!temp[0]) {
+      toast = createToast(
+        "error",
+        "Error",
+        "An API error has occured, please try again.",
+        5000
+      );
+      progress = false;
+      return;
+    }
+    items = temp;
     fetchComplete = true;
     progress = false;
   }
