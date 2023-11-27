@@ -133,10 +133,12 @@
                         (end = dateToStr(
                           dateAdjustDays(option, new Date(start), new Date())
                         ))}
-                      disabled={end ==
-                        dateToStr(
-                          dateAdjustDays(option, new Date(start), new Date())
-                        )}
+                      disabled={end.length > 0 &&
+                        start.length > 0 &&
+                        end ==
+                          dateToStr(
+                            dateAdjustDays(option, new Date(start), new Date())
+                          )}
                       class="btn btn-accent text-base"
                       >{option.toLocaleString()} Days
                     </button>
