@@ -3,10 +3,9 @@
   import FormInput from "$lib/components/FormInput.svelte";
   import hrefs from "$lib/hrefs.json";
   import Title from "$lib/Title.svelte";
-  import { createToast } from "../hooks.client.js";
+  import { addParamsString, createToast } from "../hooks.client.js";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { goto } from "$app/navigation";
-  import { onMount } from "svelte";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
   import HomeCard from "$lib/components/HomeCard.svelte";
   import sample1 from "$lib/images/med_sample1.png";
@@ -15,17 +14,8 @@
   import Container from "$lib/components/Container.svelte";
 
   export let data;
-  const { supabase, session } = data;
+  const { session } = data;
   const formspree = "https://formspree.io/f/meqbwbjl";
-  let username = "";
-  onMount(async () => {
-    if (!session) return;
-    const { data } = await supabase
-      .from("profiles")
-      .select("username")
-      .eq("user_id", session.user.id);
-    username = data[0].username;
-  });
 
   let toast;
   let progress = false;
@@ -83,10 +73,10 @@
       </a>
 
       <a
-        href={session ? hrefs.profile.replace("slug", username) : hrefs.login}
+        href={session
+          ? addParamsString(hrefs.profileUID, { user_id: session.user.id })
+          : hrefs.login}
         class="btn btn-secondary btn-lg w-full shadow-xl"
-        class:btn-disabled={username.length == 0 && session}
-        class:skeleton={username.length == 0 && session}
       >
         {#if session}
           <i class="fa-solid fa-vault" /> View Vault

@@ -9,6 +9,7 @@
     "forgotpassword": "/forgotpassword",
     "passwordreset": "/protected/passwordreset",
     "profile": "/profile/slug",
+    "profileUID": "/profile",
     "apiAuth": "/apis/auth/callback",
     "apiNasa": "/apis/nasa"
 }
