@@ -94,10 +94,13 @@
     </div>
     <div class="bg-gray-900 p-4 rounded-xl mb-10">
       <form
+        class="text-center sm:text-left"
         on:submit|preventDefault={() =>
           gotoProgress(hrefs.profile.replace("slug", userSearch))}
       >
-        <label for="search" class="card-title mb-2">Profile Search</label>
+        <div class="mb-2">
+          <label for="search" class=" font-bold text-xl">Profile Search</label>
+        </div>
         <FormInput
           type="text"
           id="search"
