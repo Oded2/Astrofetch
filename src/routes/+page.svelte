@@ -74,11 +74,12 @@
       </a>
 
       <a
-        data-sveltekit-reload
+        on:click={() => (progress = true)}
         href={session
           ? addParamsString(hrefs.profileUID, { user_id: session.user.id })
           : hrefs.login}
         class="btn btn-secondary btn-lg w-full shadow-xl"
+        class:btn-disabled={progress}
       >
         {#if session}
           <i class="fa-solid fa-vault" /> View Vault
