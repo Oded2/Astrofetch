@@ -1,8 +1,9 @@
 <script>
   export let title = "";
+  export let width = true;
 </script>
 
-<div class="h-full card w-96 bg-gray-900 shadow-xl mb-5">
+<div class="h-full card bg-gray-900 shadow-xl mb-5" class:w-96={width}>
   <div class="card-body">
     {#if title.length > 0}
       <div class="mb-4">

@@ -111,7 +111,7 @@
     {:else}
       <form on:submit|preventDefault={submit}>
         <div class="flex justify-center">
-          <FormCard>
+          <FormCard width={false}>
             <div class="mb-4">
               <label for="start" class="card-title mb-2">Start Date</label>
               <FormInput
