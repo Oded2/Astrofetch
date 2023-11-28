@@ -12,7 +12,7 @@
   }
 </script>
 
-<main class="bg-gray-950">
+<main class="bg-gray-950 overflow-hidden">
   <Container margin={false} padding={false}>
     <div class="hero min-h-screen">
       <div class="hero-content flex-col xl:flex-row">
