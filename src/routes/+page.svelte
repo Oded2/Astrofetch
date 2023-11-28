@@ -131,6 +131,14 @@
           <a class="underline" href={hrefs.fetch}>fetch</a> button.
         </p>
       </AccordionItem>
+      <AccordionItem header="Development">
+        <p class="text-lg">
+          As of now, AstroFetch is open source with the source code available on <a
+            href={hrefs.exGithub}
+            class="underline">GitHub</a
+          >. AstroFetch may or not be open source in the future.
+        </p>
+      </AccordionItem>
       <AccordionItem header="Contact">
         <form on:submit|preventDefault={contact}>
           <div class="mb-4">

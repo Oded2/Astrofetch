@@ -11,5 +11,6 @@
     "profile": "/profile/slug",
     "profileUID": "/profile",
     "apiAuth": "/apis/auth/callback",
-    "apiNasa": "/apis/nasa"
+    "apiNasa": "/apis/nasa",
+    "exGithub": "https://github.com/Oded2/Astrofetch"
 }
