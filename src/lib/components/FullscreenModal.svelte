@@ -10,12 +10,6 @@
     <slot />
   </div>
   <FloatElement>
-    <button on:click={dispatch("exit")} class="btn btn-neutral">Exit</button>
+    <button on:click class="btn btn-neutral">Exit</button>
   </FloatElement>
 {/if}
-
-<style>
-  :global(body) {
-    overflow: hidden;
-  }
-</style>
