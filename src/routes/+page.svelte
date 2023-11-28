@@ -127,8 +127,8 @@
           To use AstroFetch, simply <a class="underline" href={hrefs.login}
             >login</a
           >
-          click on the
-          <a class="underline" href={hrefs.fetch}>fetch</a> button.
+          and navigate to the
+          <a class="underline" href={hrefs.fetch}>fetch</a> page.
         </p>
       </AccordionItem>
       <AccordionItem header="Development">
