@@ -1,8 +1,6 @@
 <script>
   import FloatElement from "./FloatElement.svelte";
-  import { createEventDispatcher } from "svelte";
   export let visible = true;
-  const dispatch = createEventDispatcher();
 </script>
 
 {#if visible}
