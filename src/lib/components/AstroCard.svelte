@@ -81,7 +81,6 @@
       {#if item.media_type === "image" || item.media_type === "video"}
         <a
           target="_blank"
-          data-sveltekit-preload-data="off"
           href={addParamsString(hrefs.viewer, item)}
           class="btn btn-secondary w-full sm:w-24">View</a
         >
