@@ -98,6 +98,7 @@
 
 <style>
   div.card {
+    min-height: 24rem !important;
     max-height: 95vh;
   }
 </style>
