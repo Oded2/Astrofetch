@@ -1,4 +1,6 @@
 <script>
+  import { fade } from "svelte/transition";
+  import { flip } from "svelte/animate";
   import hrefs from "$lib/hrefs.json";
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
@@ -78,9 +80,18 @@
     </div>
     {#if fetchComplete}
       <div class="mb-3">
-        <button class="btn btn-primary" on:click={() => (fetchComplete = false)}
-          >New Fetch</button
+        <button
+          type="button"
+          class="btn btn-primary"
+          on:click={() => (fetchComplete = false)}>New Fetch</button
         >
+        <button
+          type="button"
+          class="btn btn-secondary ml-2"
+          on:click={() => (items = items.reverse())}
+        >
+          <i class="fa-solid fa-right-left"></i>
+        </button>
       </div>
       <div class="mb-5">
         <span class="font-bold"
@@ -88,24 +99,29 @@
         >
       </div>
       <AstroGridContainer>
-        {#each items as item}
-          <AstroCard
-            on:duplicate={() =>
-              (toast = createToast(
-                "error",
-                "Duplicate",
-                "This item is already in your vault"
-              ))}
-            on:success={() =>
-              (toast = createToast(
-                "success",
-                "Added to Vault",
-                "This item has been added to your vault"
-              ))}
-            {supabase}
-            userId={session.user.id}
-            {item}
-          />
+        {#each items as item (item)}
+          <div
+            animate:flip={{ duration: 200 }}
+            transition:fade={{ duration: 200 }}
+          >
+            <AstroCard
+              on:duplicate={() =>
+                (toast = createToast(
+                  "error",
+                  "Duplicate",
+                  "This item is already in your vault"
+                ))}
+              on:success={() =>
+                (toast = createToast(
+                  "success",
+                  "Added to Vault",
+                  "This item has been added to your vault"
+                ))}
+              {supabase}
+              userId={session.user.id}
+              {item}
+            />
+          </div>
         {/each}
       </AstroGridContainer>
     {:else}
