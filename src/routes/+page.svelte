@@ -14,7 +14,7 @@
   import Container from "$lib/components/Container.svelte";
 
   export let data;
-  const { session } = data;
+  const { supabase, session } = data;
   const formspree = "https://formspree.io/f/meqbwbjl";
 
   let toast;
@@ -24,6 +24,7 @@
   let topic = "";
   let message = "";
   let userSearch = "";
+
   async function contact() {
     progress = true;
     await fetch(formspree, {
@@ -72,21 +73,30 @@
           Create Account
         {/if}
       </a>
-
-      <a
-        on:click={() => (progress = true)}
-        href={session
-          ? addParamsString(hrefs.profileUID, { user_id: session.user.id })
-          : hrefs.login}
-        class="btn btn-secondary btn-lg w-full shadow-xl"
-        class:btn-disabled={progress}
-      >
-        {#if session}
-          <i class="fa-solid fa-vault" /> View Vault
-        {:else}
+      {#if session}
+        <button
+          disabled={progress}
+          on:click={async () => {
+            progress = true;
+            const { data } = await supabase
+              .from("profiles")
+              .select("username")
+              .eq("user_id", session.user.id);
+            const username = data[0].username;
+            goto(hrefs.profile.replace("slug", username));
+          }}
+          class="btn btn-secondary btn-lg w-full shadow-xl"
+          ><i class="fa-solid fa-vault"></i> View Vault</button
+        >
+      {:else}
+        <a
+          href={hrefs.login}
+          class="btn btn-secondary btn-lg w-full shadow-xl"
+          class:btn-disabled={progress}
+        >
           Login
-        {/if}
-      </a>
+        </a>
+      {/if}
     </div>
     <div class="bg-gray-900 p-4 rounded-xl mb-10">
       <form
