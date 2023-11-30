@@ -7,8 +7,8 @@
   import { createToast } from "../../hooks.client.js";
   import Container from "$lib/components/Container.svelte";
 
-export let data;
-const {supabase} = data;
+  export let data;
+  const { supabase } = data;
   let toast;
   let progress = false;
   let email = "";
