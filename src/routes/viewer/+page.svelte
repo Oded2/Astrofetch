@@ -79,7 +79,6 @@
 
 <style>
   img {
-    min-width: 24rem;
     max-height: 95vh;
   }
   iframe {
