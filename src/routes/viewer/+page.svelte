@@ -9,7 +9,7 @@
 
 <main class="bg-gray-950 overflow-hidden">
   <Container margin={false} padding={false}>
-    <ItemViewer {item}></ItemViewer>
+    <ItemViewer {item} exitButton={false}></ItemViewer>
   </Container>
 </main>
 

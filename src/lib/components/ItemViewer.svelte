@@ -1,7 +1,12 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import { formatDate } from "../../hooks.client.js";
   import Drawer from "./Drawer.svelte";
+  import FloatElement from "./FloatElement.svelte";
   export let item = {};
+  export let exitButton = true;
+
+  const dispatch = createEventDispatcher();
 
   function formatDateStr(str = "") {
     return formatDate(new Date(str));
@@ -66,3 +71,9 @@
     >
   </div>
 </Drawer>
+
+<FloatElement visible={exitButton}
+  ><button class="btn btn-primary shadow-2xl" on:click={() => dispatch("exit")}
+    >Exit</button
+  ></FloatElement
+>
