@@ -43,7 +43,9 @@
   }
 </script>
 
-<div class="h-full card bg-gray-900 shadow-xl min-h-[400px] max-h-[95vh]">
+<div
+  class="h-full card bg-gray-900 shadow-xl min-h-[400px!important] max-h-[95vh]"
+>
   <figure>
     {#if item.media_type === "image"}
       <img
