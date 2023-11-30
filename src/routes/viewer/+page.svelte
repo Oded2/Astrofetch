@@ -6,13 +6,13 @@
 
   export let data;
   const { item } = data;
-  let origin;
-  onMount(() => (origin = location.origin));
+  let mount = false;
+  onMount(() => (mount = true));
 </script>
 
 <main class="bg-gray-950 overflow-hidden">
   <Container margin={false} padding={false}>
-    {#if origin}
+    {#if mount}
       <ItemViewer {item} exitButton={false}></ItemViewer>
     {/if}
   </Container>
