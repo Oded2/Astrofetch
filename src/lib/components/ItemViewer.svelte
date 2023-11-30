@@ -4,6 +4,7 @@
   import Drawer from "./Drawer.svelte";
   import FloatElement from "./FloatElement.svelte";
   import { hrefs } from "$lib/index.js";
+  import ShareModal from "./ShareModal.svelte";
   export let item = {};
   export let exitButton = true;
 
@@ -73,15 +74,13 @@
   </div>
 </Drawer>
 
+<ShareModal
+  id="share"
+  link={addParamsString(location.origin + hrefs.viewer, item)}
+></ShareModal>
+
 <FloatElement>
-  <button
-    class="btn btn-secondary"
-    on:click={() =>
-      navigator.clipboard.writeText(
-        addParamsString(location.origin + hrefs.viewer, item)
-      )}
-    >Copy Link
-  </button>
+  <label for="share" class="btn btn-secondary">Share</label>
   {#if exitButton}
     <button
       class="btn btn-primary shadow-2xl ms-2"
