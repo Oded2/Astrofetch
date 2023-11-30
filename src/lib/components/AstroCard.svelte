@@ -6,7 +6,7 @@
     maxLen,
   } from "../../hooks.client.js";
   import { hrefs } from "$lib/index.js";
-  import { supabase as supabaseClient } from "$lib/supabaseClient.js";
+  import { supabase as supaBaseClient } from "$lib/index.js";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   export let item = {};

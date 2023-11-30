@@ -1,3 +1,7 @@
+import { createClient } from "@supabase/supabase-js";
+import { PUBLIC_SUPABASE_ANON_KEY } from "$env/static/public";
+import { PUBLIC_SUPABASE_URL } from "$env/static/public";
+
 export const hrefs = {
   home: "/",
   signup: "/signup",
@@ -14,3 +18,8 @@ export const hrefs = {
   apiNasa: "/apis/nasa",
   exGithub: "https://github.com/Oded2/Astrofetch",
 };
+
+export const supabase = createClient(
+  PUBLIC_SUPABASE_URL,
+  PUBLIC_SUPABASE_ANON_KEY
+);
