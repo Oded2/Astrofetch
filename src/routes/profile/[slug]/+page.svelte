@@ -5,12 +5,15 @@
     createToast,
     calculateMinutes,
     GetSortOrder,
+    waitForElm,
   } from "../../../hooks.client.js";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
   import Title from "$lib/Title.svelte";
   import Container from "$lib/components/Container.svelte";
+  import { onMount } from "svelte";
+  import ItemViewer from "$lib/components/ItemViewer.svelte";
   export let data;
   const { supabase, session, profile } = data;
   let { items } = data;
@@ -25,6 +28,9 @@
   items = items.sort(GetSortOrderCustom("date", true));
   let toast;
   let progress = false;
+  let view = false;
+  let viewItem = {};
+  let lastItem = "";
   $: divider = parseInt((currentPage - 1) / pageBreakpoint) * pageBreakpoint;
   async function deleteFromVault(item = {}) {
     progress = true;
@@ -58,121 +64,139 @@
   }
 </script>
 
-<main>
-  <Container>
-    <div class="text-center mb-7">
-      <h1 class="text-6xl font-bold mb-2">
-        {`${profile.display_name}'s`} <span class="text-accent">Vault</span>
-      </h1>
-      {#if profile.bio.length > 0}
-        <h4 class="text-xl">{profile.bio}</h4>
-      {/if}
-      {#if profile.birthday}
-        <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
-      {/if}
-    </div>
-    <div class="mb-7">
-      <label class="sm:flex mb-2 font-bold text-xl" for="sort">Sort</label>
-      <div>
-        <select
-          bind:value={sortBy}
-          on:change={() => {
-            if (sortBy === "date")
-              items.sort(GetSortOrderCustom("date", !reversed));
-            else if (sortBy === "dateAdded")
-              items.sort(GetSortOrder("created_at", !reversed));
-            else if (sortBy === "title")
-              items.sort(GetSortOrderCustom("title", reversed));
-            items = items;
-          }}
-          id="sort"
-          class="select select-bordered w-full max-w-xs"
-        >
-          <option value="date" selected>Date</option>
-          <option value="dateAdded">Date Added</option>
-          <option value="title">Title</option>
-        </select>
-
-        <button
-          type="button"
-          class="btn btn-secondary sm:ml-1 mt-2"
-          title="Reverse"
-          on:click={() => {
-            reversed = !reversed;
-            items = items.reverse();
-          }}
-        >
-          <i class="fa-solid fa-right-left"></i>
-        </button>
+<main class:bg-gray-950={view}>
+  <Container padding={!view} margin={!view}>
+    {#if view}
+      <ItemViewer
+        item={viewItem}
+        on:exit={() => {
+          view = false;
+          waitForElm(`#${lastItem}`).then((event) => {
+            event.scrollIntoView({ block: "center" });
+          });
+        }}
+      ></ItemViewer>
+    {:else}
+      <div class="text-center mb-7">
+        <h1 class="text-6xl font-bold mb-2">
+          {`${profile.display_name}'s`} <span class="text-accent">Vault</span>
+        </h1>
+        {#if profile.bio.length > 0}
+          <h4 class="text-xl">{profile.bio}</h4>
+        {/if}
+        {#if profile.birthday}
+          <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
+        {/if}
       </div>
-    </div>
-    {#if items.length > maxItems}
       <div class="mb-7">
-        <div class="join">
-          <button
-            class="join-item btn btn-secondary"
-            disabled={currentPage == 1}
-            on:click={() => currentPage--}>&laquo;</button
+        <label class="sm:flex mb-2 font-bold text-xl" for="sort">Sort</label>
+        <div>
+          <select
+            bind:value={sortBy}
+            on:change={() => {
+              if (sortBy === "date")
+                items.sort(GetSortOrderCustom("date", !reversed));
+              else if (sortBy === "dateAdded")
+                items.sort(GetSortOrder("created_at", !reversed));
+              else if (sortBy === "title")
+                items.sort(GetSortOrderCustom("title", reversed));
+              items = items;
+            }}
+            id="sort"
+            class="select select-bordered w-full max-w-xs"
           >
-          {#each { length: maxPage + (maxPage > pageBreakpoint ? pageBreakpoint % maxPage : 0) } as _, index}
-            {#if divider + pageBreakpoint >= index + 1 && index + 1 > divider}
-              <button
-                class="join-item btn btn-secondary"
-                class:btn-active={index + 1 == currentPage}
-                disabled={index + 1 > maxPage}
-                on:click={() => (currentPage = index + 1)}
-                >{index + 1 <= maxPage ? index + 1 : "-"}
-              </button>
-            {/if}
-          {/each}
+            <option value="date" selected>Date</option>
+            <option value="dateAdded">Date Added</option>
+            <option value="title">Title</option>
+          </select>
+
           <button
-            class="join-item btn btn-secondary"
-            disabled={currentPage == maxPage}
-            on:click={() => currentPage++}>&raquo;</button
+            type="button"
+            class="btn btn-secondary sm:ml-1 mt-2"
+            title="Reverse"
+            on:click={() => {
+              reversed = !reversed;
+              items = items.reverse();
+            }}
           >
+            <i class="fa-solid fa-right-left"></i>
+          </button>
         </div>
       </div>
-    {/if}
-    <div class="border-b border-b-gray-600 pb-9">
-      <AstroGridContainer>
-        {#each items as item, index (item)}
-          <div
-            class:absolute={!(
-              index < currentPage * maxItems &&
-              index >= currentPage * maxItems - maxItems
-            )}
-            animate:flip={{ duration: 200 }}
-            transition:fade={{ duration: 200 }}
-          >
-            {#if index < currentPage * maxItems && index >= currentPage * maxItems - maxItems}
-              <AstroCard
-                isPersonal={session
-                  ? session.user.id === profile.user_id
-                  : false}
-                {supabase}
-                userId={session ? session.user.id : ""}
-                item={item.data}
-                dateVaulted={item.created_at}
-                {progress}
-                on:duplicate={() =>
-                  (toast = createToast(
-                    "error",
-                    "Duplicate",
-                    "This item is already in your vault"
-                  ))}
-                on:success={() =>
-                  (toast = createToast(
-                    "success",
-                    "Added to Vault",
-                    "This item has been added to your vault"
-                  ))}
-                on:delete={() => deleteFromVault(item)}
-              />
-            {/if}
+      {#if items.length > maxItems}
+        <div class="mb-7">
+          <div class="join">
+            <button
+              class="join-item btn btn-secondary"
+              disabled={currentPage == 1}
+              on:click={() => currentPage--}>&laquo;</button
+            >
+            {#each { length: maxPage + (maxPage > pageBreakpoint ? pageBreakpoint % maxPage : 0) } as _, index}
+              {#if divider + pageBreakpoint >= index + 1 && index + 1 > divider}
+                <button
+                  class="join-item btn btn-secondary"
+                  class:btn-active={index + 1 == currentPage}
+                  disabled={index + 1 > maxPage}
+                  on:click={() => (currentPage = index + 1)}
+                  >{index + 1 <= maxPage ? index + 1 : "-"}
+                </button>
+              {/if}
+            {/each}
+            <button
+              class="join-item btn btn-secondary"
+              disabled={currentPage == maxPage}
+              on:click={() => currentPage++}>&raquo;</button
+            >
           </div>
-        {/each}
-      </AstroGridContainer>
-    </div>
+        </div>
+      {/if}
+      <div class="border-b border-b-gray-600 pb-9">
+        <AstroGridContainer>
+          {#each items as item, index (item)}
+            <div
+              id={`item${index}`}
+              class:absolute={!(
+                index < currentPage * maxItems &&
+                index >= currentPage * maxItems - maxItems
+              )}
+              animate:flip={{ duration: 200 }}
+              transition:fade={{ duration: 200 }}
+            >
+              {#if index < currentPage * maxItems && index >= currentPage * maxItems - maxItems}
+                <AstroCard
+                  isPersonal={session
+                    ? session.user.id === profile.user_id
+                    : false}
+                  {supabase}
+                  userId={session ? session.user.id : ""}
+                  item={item.data}
+                  dateVaulted={item.created_at}
+                  {progress}
+                  on:duplicate={() =>
+                    (toast = createToast(
+                      "error",
+                      "Duplicate",
+                      "This item is already in your vault"
+                    ))}
+                  on:success={() =>
+                    (toast = createToast(
+                      "success",
+                      "Added to Vault",
+                      "This item has been added to your vault"
+                    ))}
+                  on:delete={() => deleteFromVault(item)}
+                  on:view={() => {
+                    lastItem = `item${index}`;
+                    viewItem = item.data;
+                    view = true;
+                  }}
+                />
+              {/if}
+            </div>
+          {/each}
+        </AstroGridContainer>
+      </div>
+    {/if}
   </Container>
 </main>
 

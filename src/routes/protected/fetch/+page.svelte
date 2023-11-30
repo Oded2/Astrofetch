@@ -1,6 +1,5 @@
 <script>
-  import { fade } from "svelte/transition";
-  import { flip } from "svelte/animate";
+  import ItemViewer from "$lib/components/ItemViewer.svelte";
   import { hrefs } from "$lib/index.js";
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
@@ -10,6 +9,7 @@
     dateToStr,
     fetchFromEndpoint,
     formatDate,
+    waitForElm,
   } from "../../../hooks.client.js";
   import Title from "$lib/Title.svelte";
   import AstroCard from "$lib/components/AstroCard.svelte";
@@ -28,6 +28,9 @@
   let progress = false;
   let fetchComplete = false;
   let items = [];
+  let view = false;
+  let viewItem = {};
+  let lastItem = "";
 
   function verify() {
     return start < end;
@@ -70,135 +73,158 @@
   }
 </script>
 
-<main>
-  <Container>
-    <div class="text-center mb-7">
-      <h1 class="text-6xl font-bold">
-        Astro<span class="text-accent">Fetch</span>
-      </h1>
-    </div>
-    {#if fetchComplete}
-      <div class="mb-3">
-        <button
-          type="button"
-          class="btn btn-primary"
-          on:click={() => (fetchComplete = false)}>New Fetch</button
-        >
-        <button
-          type="button"
-          class="btn btn-secondary ml-2"
-          on:click={() => (items = items.reverse())}
-        >
-          <i class="fa-solid fa-right-left"></i>
-        </button>
-      </div>
-      <div class="mb-5">
-        <span class="font-bold"
-          >{formatDateStr(start)} to {formatDateStr(end)}</span
-        >
-      </div>
-      <AstroGridContainer>
-        {#each items as item (item)}
-          <AstroCard
-            on:duplicate={() =>
-              (toast = createToast(
-                "error",
-                "Duplicate",
-                "This item is already in your vault"
-              ))}
-            on:success={() =>
-              (toast = createToast(
-                "success",
-                "Added to Vault",
-                "This item has been added to your vault"
-              ))}
-            {supabase}
-            userId={session.user.id}
-            {item}
-          />
-        {/each}
-      </AstroGridContainer>
+<main class:bg-gray-950={view}>
+  <Container padding={!view} margin={!view}>
+    {#if view}
+      <ItemViewer
+        item={viewItem}
+        on:exit={() => {
+          view = false;
+          waitForElm(`#${lastItem}`).then((event) => {
+            event.scrollIntoView({ block: "center" });
+          });
+        }}
+      ></ItemViewer>
     {:else}
-      <form on:submit|preventDefault={submit}>
-        <div class="flex justify-center">
-          <FormCard width={false}>
-            <div class="mb-4">
-              <label for="start" class="card-title mb-2">Start Date</label>
-              <FormInput
-                type="date"
-                required
-                id="start"
-                bind:value={start}
-                error={start > end}
-                min={minDate}
-                max={dateToStr()}
-              />
-            </div>
-            <div class="mb-4">
-              <label for="end" class="card-title mb-2">End Date</label>
-              <FormInput
-                type="date"
-                required
-                id="end"
-                bind:value={end}
-                min={minDate}
-                max={dateToStr()}
-              />
-              <div class="mt-2">
-                <fieldset class="grid grid-cols-3 gap-x-3">
-                  {#each adjustOptions as option}
-                    <button
-                      type="button"
-                      on:click={() =>
-                        (end = dateToStr(
-                          dateAdjustDays(option, new Date(start), new Date())
-                        ))}
-                      disabled={end.length > 0 &&
-                        start.length > 0 &&
-                        end ==
-                          dateToStr(
-                            dateAdjustDays(option, new Date(start), new Date())
-                          )}
-                      class="btn btn-accent text-base"
-                      >{option.toLocaleString()} Days
-                    </button>
-                  {/each}
-                </fieldset>
-              </div>
-            </div>
-            <div class="card-actions justify-around">
-              <button
-                type="submit"
-                disabled={progress}
-                class="btn btn-primary w-full"
-              >
-                {#if progress}
-                  <span class="loading loading-spinner loading-lg"></span>
-                {:else}
-                  Fetch
-                {/if}
-              </button>
-              <button
-                type="button"
-                class="btn btn-secondary w-full"
-                disabled={start === ogStart && end === ogEnd}
-                on:click={() => {
-                  start = ogStart;
-                  end = ogEnd;
-                }}>Reset</button
-              >
-              <button
-                type="button"
-                class="btn btn-accent w-full"
-                on:click={() => {
-                  start = getRandomDate(minDate, dateToStr());
-                  end = dateToStr(dateAdjustDays(30, new Date(start)));
-                }}>Randomize</button
-              >
-            </div>
-          </FormCard>
+      <div class="text-center mb-7">
+        <h1 class="text-6xl font-bold">
+          Astro<span class="text-accent">Fetch</span>
+        </h1>
+      </div>
+      {#if fetchComplete}
+        <div class="mb-3">
+          <button
+            type="button"
+            class="btn btn-primary"
+            on:click={() => (fetchComplete = false)}>New Fetch</button
+          >
+          <button
+            type="button"
+            class="btn btn-secondary ml-2"
+            on:click={() => (items = items.reverse())}
+          >
+            <i class="fa-solid fa-right-left"></i>
+          </button>
         </div>
-      </form>
+        <div class="mb-5">
+          <span class="font-bold"
+            >{formatDateStr(start)} to {formatDateStr(end)}</span
+          >
+        </div>
+        <AstroGridContainer>
+          {#each items as item, index (item)}
+            <div id={`item${index}`}>
+              <AstroCard
+                on:duplicate={() =>
+                  (toast = createToast(
+                    "error",
+                    "Duplicate",
+                    "This item is already in your vault"
+                  ))}
+                on:success={() =>
+                  (toast = createToast(
+                    "success",
+                    "Added to Vault",
+                    "This item has been added to your vault"
+                  ))}
+                {supabase}
+                userId={session.user.id}
+                {item}
+                on:view={() => {
+                  lastItem = `item${index}`;
+                  viewItem = item;
+                  view = true;
+                }}
+              />
+            </div>
+          {/each}
+        </AstroGridContainer>
+      {:else}
+        <form on:submit|preventDefault={submit}>
+          <div class="flex justify-center">
+            <FormCard width={false}>
+              <div class="mb-4">
+                <label for="start" class="card-title mb-2">Start Date</label>
+                <FormInput
+                  type="date"
+                  required
+                  id="start"
+                  bind:value={start}
+                  error={start > end}
+                  min={minDate}
+                  max={dateToStr()}
+                />
+              </div>
+              <div class="mb-4">
+                <label for="end" class="card-title mb-2">End Date</label>
+                <FormInput
+                  type="date"
+                  required
+                  id="end"
+                  bind:value={end}
+                  min={minDate}
+                  max={dateToStr()}
+                />
+                <div class="mt-2">
+                  <fieldset class="grid grid-cols-3 gap-x-3">
+                    {#each adjustOptions as option}
+                      <button
+                        type="button"
+                        on:click={() =>
+                          (end = dateToStr(
+                            dateAdjustDays(option, new Date(start), new Date())
+                          ))}
+                        disabled={end.length > 0 &&
+                          start.length > 0 &&
+                          end ==
+                            dateToStr(
+                              dateAdjustDays(
+                                option,
+                                new Date(start),
+                                new Date()
+                              )
+                            )}
+                        class="btn btn-accent text-base"
+                        >{option.toLocaleString()} Days
+                      </button>
+                    {/each}
+                  </fieldset>
+                </div>
+              </div>
+              <div class="card-actions justify-around">
+                <button
+                  type="submit"
+                  disabled={progress}
+                  class="btn btn-primary w-full"
+                >
+                  {#if progress}
+                    <span class="loading loading-spinner loading-lg"></span>
+                  {:else}
+                    Fetch
+                  {/if}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary w-full"
+                  disabled={start === ogStart && end === ogEnd}
+                  on:click={() => {
+                    start = ogStart;
+                    end = ogEnd;
+                  }}>Reset</button
+                >
+                <button
+                  type="button"
+                  class="btn btn-accent w-full"
+                  on:click={() => {
+                    start = getRandomDate(minDate, dateToStr());
+                    end = dateToStr(dateAdjustDays(30, new Date(start)));
+                  }}>Randomize</button
+                >
+              </div>
+            </FormCard>
+          </div>
+        </form>
+      {/if}
     {/if}
   </Container>
 </main>
