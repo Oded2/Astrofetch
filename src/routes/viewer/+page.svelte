@@ -33,7 +33,7 @@
           <div class="mb-10 sm:mb-0 w-full">
             {#if item.media_type === "video"}
               <iframe
-                class="rounded-lg lg:max-w-screen-sm aspect-video"
+                class="rounded-lg lg:max-w-screen-sm aspect-video w-auto h-[300px]"
                 src={item.url}
                 title={item.title}
                 frameborder="0"
@@ -41,7 +41,7 @@
             {/if}
             {#if item.media_type === "image"}
               <img
-                class="rounded-xl shadow-2xl lg:min-w-[32rem] m-auto w-full lg:w-auto lg:max-w-screen-md sm:hover:scale-110 transition-all"
+                class="rounded-xl shadow-2xl lg:min-w-[32rem] m-auto w-full lg:w-auto lg:max-w-screen-md sm:hover:scale-110 transition-all max-h-[90vh]"
                 src={item.url}
                 alt={item.title}
               />
@@ -76,13 +76,3 @@
 </Drawer>
 
 <Title title={item.title} />
-
-<style>
-  img {
-    max-height: 95vh;
-  }
-  iframe {
-    height: 300px;
-    width: auto;
-  }
-</style>
