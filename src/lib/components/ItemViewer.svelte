@@ -1,8 +1,9 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { formatDate } from "../../hooks.client.js";
+  import { addParamsString, formatDate } from "../../hooks.client.js";
   import Drawer from "./Drawer.svelte";
   import FloatElement from "./FloatElement.svelte";
+  import { hrefs } from "$lib/index.js";
   export let item = {};
   export let exitButton = true;
 
@@ -72,8 +73,20 @@
   </div>
 </Drawer>
 
-<FloatElement visible={exitButton}
-  ><button class="btn btn-primary shadow-2xl" on:click={() => dispatch("exit")}
-    >Exit</button
-  ></FloatElement
->
+<FloatElement>
+  <button
+    class="btn btn-secondary"
+    on:click={() =>
+      navigator.clipboard.writeText(
+        addParamsString(location.origin + hrefs.viewer, item)
+      )}
+    >Copy Link
+  </button>
+  {#if exitButton}
+    <button
+      class="btn btn-primary shadow-2xl ms-2"
+      on:click={() => dispatch("exit")}
+      >Exit
+    </button>
+  {/if}
+</FloatElement>
