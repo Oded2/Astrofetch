@@ -1,8 +1,6 @@
 <script>
-  import { createEventDispatcher } from "svelte";
   import FloatElement from "./FloatElement.svelte";
-  export let visible = true;
-  const dispatch = createEventDispatcher();
+  export let visible = false;
 </script>
 
 {#if visible}
@@ -12,7 +10,7 @@
     <slot />
   </div>
   <FloatElement>
-    <button on:click={() => dispatch("exit")} class="btn btn-neutral"
+    <button on:click={() => (visible = false)} class="btn btn-neutral"
       >Exit</button
     >
   </FloatElement>
