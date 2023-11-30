@@ -32,7 +32,6 @@
   function verify() {
     return start < end;
   }
-
   function formatDateStr(str = "") {
     return formatDate(new Date(str), { month: "long", day: "numeric" });
   }
@@ -100,28 +99,23 @@
       </div>
       <AstroGridContainer>
         {#each items as item (item)}
-          <div
-            animate:flip={{ duration: 200 }}
-            transition:fade={{ duration: 200 }}
-          >
-            <AstroCard
-              on:duplicate={() =>
-                (toast = createToast(
-                  "error",
-                  "Duplicate",
-                  "This item is already in your vault"
-                ))}
-              on:success={() =>
-                (toast = createToast(
-                  "success",
-                  "Added to Vault",
-                  "This item has been added to your vault"
-                ))}
-              {supabase}
-              userId={session.user.id}
-              {item}
-            />
-          </div>
+          <AstroCard
+            on:duplicate={() =>
+              (toast = createToast(
+                "error",
+                "Duplicate",
+                "This item is already in your vault"
+              ))}
+            on:success={() =>
+              (toast = createToast(
+                "success",
+                "Added to Vault",
+                "This item has been added to your vault"
+              ))}
+            {supabase}
+            userId={session.user.id}
+            {item}
+          />
         {/each}
       </AstroGridContainer>
     {:else}
