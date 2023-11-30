@@ -1,4 +1,4 @@
-import hrefs from "$lib/hrefs.json";
+import { hrefs } from "$lib/index.js";
 import { supabase } from "$lib/index.js";
 import { redirect, error } from "@sveltejs/kit";
 
