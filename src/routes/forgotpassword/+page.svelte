@@ -3,10 +3,12 @@
   import Title from "$lib/Title.svelte";
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
-  import { supabase } from "$lib/supabaseClient.js";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
   import { createToast } from "../../hooks.client.js";
   import Container from "$lib/components/Container.svelte";
+
+export let data;
+const {supabase} = data;
   let toast;
   let progress = false;
   let email = "";
