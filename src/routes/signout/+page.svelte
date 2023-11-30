@@ -1,5 +1,5 @@
 <script>
-  import hrefs from "$lib/hrefs.json";
+  import { hrefs } from "$lib/index.js";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
   import Title from "$lib/Title.svelte";

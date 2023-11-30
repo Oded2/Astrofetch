@@ -1,5 +1,5 @@
 <script>
-  import hrefs from "$lib/hrefs.json";
+  import { hrefs } from "$lib/index.js";
   import Title from "$lib/Title.svelte";
   import Container from "$lib/components/Container.svelte";
   import FormCard from "$lib/components/FormCard.svelte";

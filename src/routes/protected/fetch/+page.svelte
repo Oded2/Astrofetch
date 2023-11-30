@@ -1,7 +1,7 @@
 <script>
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import hrefs from "$lib/hrefs.json";
+  import { hrefs } from "$lib/index.js";
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
   import {

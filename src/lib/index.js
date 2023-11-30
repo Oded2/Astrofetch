@@ -1,1 +1,16 @@
-// place files you want to import through the `$lib` alias in this folder.
+export const hrefs = {
+  home: "/",
+  signup: "/signup",
+  login: "/login",
+  fetch: "/protected/fetch",
+  account: "/protected/account",
+  signout: "/signout",
+  viewer: "/viewer",
+  forgotpassword: "/forgotpassword",
+  passwordreset: "/protected/passwordreset",
+  profile: "/profile/slug",
+  profileUID: "/profile",
+  apiAuth: "/apis/auth/callback",
+  apiNasa: "/apis/nasa",
+  exGithub: "https://github.com/Oded2/Astrofetch",
+};

@@ -1,7 +1,6 @@
 <script>
   import AccordionItem from "$lib/components/AccordionItem.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
-  import hrefs from "$lib/hrefs.json";
   import Title from "$lib/Title.svelte";
   import { addParamsString, createToast } from "../hooks.client.js";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
@@ -12,11 +11,12 @@
   import sample3 from "$lib/images/med_sample3.png";
   import sample4 from "$lib/images/med_sample4.png";
   import Container from "$lib/components/Container.svelte";
+  import { hrefs } from "$lib/index.js";
 
   export let data;
   const { session } = data;
   const formspree = "https://formspree.io/f/meqbwbjl";
-
+  hrefs;
   let toast;
   let progress = false;
   let email = session ? session.user.email : "";

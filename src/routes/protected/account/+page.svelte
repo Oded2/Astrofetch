@@ -4,7 +4,7 @@
   import FormCard from "$lib/components/FormCard.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
-  import hrefs from "$lib/hrefs.json";
+  import { hrefs } from "$lib/index.js";
   import { createToast, dateToStr } from "../../../hooks.client.js";
   export let data;
   const { supabase, session, profile } = data;

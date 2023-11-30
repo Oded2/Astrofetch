@@ -1,6 +1,6 @@
 <script>
   import Container from "./../../lib/components/Container.svelte";
-  import hrefs from "$lib/hrefs.json";
+  import { hrefs } from "$lib/index.js";
   import { goto } from "$app/navigation";
   import FormInput from "$lib/components/FormInput.svelte";
   import ToastSetup from "$lib/components/ToastSetup.svelte";
