@@ -42,7 +42,7 @@
         {/if}
         {#if item.media_type === "image"}
           <img
-            class="rounded-xl shadow-2xl lg:min-w-[32rem] m-auto w-full lg:w-auto lg:max-w-screen-md sm:hover:scale-110 transition-all max-h-[90vh]"
+            class="rounded-xl shadow-2xl lg:min-w-[32rem] m-auto w-full lg:w-auto lg:max-w-screen-md sm:hover:scale-110 delay-100 transition-all max-h-[90vh]"
             src={item.url}
             alt={item.title}
           />
