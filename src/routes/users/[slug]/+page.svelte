@@ -87,7 +87,6 @@
         {#if profile.birthday}
           <h4 class="text-xl">
             <a
-              class="sm:hover:opacity-80 transition-all"
               data-sveltekit-preload-data="off"
               data-sveltekit-reload
               href={hrefs.birthday.replace("slug", profile.username)}
