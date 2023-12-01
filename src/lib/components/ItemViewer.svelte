@@ -8,8 +8,9 @@
   export let item = {};
   export let exitButton = true;
 
+  const message = item.message;
+  delete item.message;
   const dispatch = createEventDispatcher();
-
   function formatDateStr(str = "") {
     return formatDate(new Date(str));
   }
@@ -19,7 +20,18 @@
   <div class="hero-content flex-col xl:flex-row">
     <div class="text-center xl:text-left">
       <h1 class="text-5xl font-bold pb-2">{item.title}</h1>
-      <h2 class="text-xl pb-4 font-semibold">{formatDateStr(item.date)}</h2>
+      <h2
+        class:mb-2={message}
+        class:mb-4={!message}
+        class="text-xl font-semibold"
+      >
+        {formatDateStr(item.date)}
+      </h2>
+      {#if message != null}
+        <h3 class="text-lg mb-4 font-semibold text-left">
+          {message}
+        </h3>
+      {/if}
       <p class="text-lg pb-3 text-left">
         {item.explanation}
       </p>
