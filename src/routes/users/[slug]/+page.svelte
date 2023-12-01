@@ -13,6 +13,7 @@
   import Title from "$lib/Title.svelte";
   import Container from "$lib/components/Container.svelte";
   import ItemViewer from "$lib/components/ItemViewer.svelte";
+  import { hrefs } from "$lib/index.js";
   export let data;
   const { supabase, session, profile } = data;
   let { items } = data;
@@ -84,10 +85,21 @@
           <h4 class="text-xl">{profile.bio}</h4>
         {/if}
         {#if profile.birthday}
-          <h4 class="text-xl">{calculateAgeStr(profile.birthday)} Years Old</h4>
+          <h4 class="text-xl">
+            <a
+              class="sm:hover:opacity-80 transition-all"
+              data-sveltekit-preload-data="off"
+              data-sveltekit-reload
+              href={hrefs.birthday.replace("slug", profile.username)}
+              >{calculateAgeStr(profile.birthday)} Years Old</a
+            >
+          </h4>
         {/if}
       </div>
       <div class="mb-7">
+        <h5 class="text-lg font-semibold mb-1">
+          Username: {profile.username}
+        </h5>
         <label class="sm:flex mb-2 font-bold text-xl" for="sort">Sort</label>
         <div>
           <select

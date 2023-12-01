@@ -13,6 +13,7 @@ export const hrefs = {
   forgotpassword: "/forgotpassword",
   passwordreset: "/protected/passwordreset",
   profile: "/users/slug",
+  birthday: "/users/slug/birthday",
   profileUID: "/users",
   apiAuth: "/apis/auth/callback",
   apiNasa: "/apis/nasa",
