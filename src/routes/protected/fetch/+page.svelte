@@ -133,6 +133,7 @@
                 on:view={() => {
                   lastItem = `item${index}`;
                   viewItem = item;
+                  document.body.scrollIntoView();
                   view = true;
                 }}
               />

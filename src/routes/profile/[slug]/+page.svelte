@@ -12,7 +12,6 @@
   import AstroGridContainer from "$lib/components/AstroGridContainer.svelte";
   import Title from "$lib/Title.svelte";
   import Container from "$lib/components/Container.svelte";
-  import { onMount } from "svelte";
   import ItemViewer from "$lib/components/ItemViewer.svelte";
   export let data;
   const { supabase, session, profile } = data;
@@ -64,7 +63,7 @@
   }
 </script>
 
-<main class:bg-gray-950={view}>
+<main class:bg-gray-950={view} id="main">
   <Container padding={!view} margin={!view}>
     {#if view}
       <ItemViewer
@@ -188,6 +187,7 @@
                   on:view={() => {
                     lastItem = `item${index}`;
                     viewItem = item.data;
+                    document.body.scrollIntoView();
                     view = true;
                   }}
                 />
