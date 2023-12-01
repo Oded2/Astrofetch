@@ -32,6 +32,6 @@ export async function load({ params }) {
   if (newBirthday !== birthday)
     item.message = `Note: ${name} was born on ${formatDate(
       new Date(birthday)
-    )}, which is before NASA begun the APOD, so the APOD shown is the earliest APOD on the user's birthay since APOD has begun.`;
+    )}, which is before NASA had begun APOD, so the APOD shown is the earliest APOD on the user's birthay since APOD has begun.`;
   throw redirect(301, addParamsString(hrefs.viewer, item));
 }
