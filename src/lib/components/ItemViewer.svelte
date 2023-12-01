@@ -34,7 +34,7 @@
       <div class="mb-10 sm:mb-0 w-full">
         {#if item.media_type === "video"}
           <iframe
-            class="rounded-lg lg:max-w-screen-sm aspect-video w-auto h-[300px]"
+            class="rounded-lg lg:max-w-screen-sm aspect-video w-full lg:w-auto lg:h-[300px]"
             src={item.url}
             title={item.title}
             frameborder="0"
