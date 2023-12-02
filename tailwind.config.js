@@ -9,7 +9,7 @@ export default {
       "light",
       "dark",
       {
-        mytheme: {
+        astrofetch: {
           primary: "#6000ff",
 
           secondary: "#1e40af",
