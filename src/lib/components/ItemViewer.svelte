@@ -94,9 +94,12 @@
   ></ShareModal>
 {/if}
 <FloatElement>
-  {#if allowShare}
-    <label for="share" class="btn btn-secondary">Share</label>
-  {/if}
+  <label
+    for="share"
+    class="btn btn-secondary"
+    class:btn-disabled={!allowShare}
+    class:skeleton={!allowShare}>Share</label
+  >
   {#if exitButton}
     <button
       class="btn btn-primary shadow-2xl ms-2"
