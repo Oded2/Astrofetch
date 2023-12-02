@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { addParamsString, formatDate } from "../../hooks.client.js";
+  import { formatDate } from "../../hooks.client.js";
   import Drawer from "./Drawer.svelte";
   import FloatElement from "./FloatElement.svelte";
   import { hrefs } from "$lib/index.js";
