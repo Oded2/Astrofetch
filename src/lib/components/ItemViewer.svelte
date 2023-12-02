@@ -20,7 +20,7 @@
   }
 </script>
 
-<div class="hero min-h-screen overflow-auto">
+<div class="hero min-h-screen overflow-auto py-5">
   <div class="hero-content flex-col xl:flex-row">
     <div class="text-center xl:text-left">
       <h1 class="text-5xl font-bold pb-2">{item.title}</h1>
