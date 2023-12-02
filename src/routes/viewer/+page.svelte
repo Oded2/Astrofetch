@@ -12,9 +12,7 @@
 
 <main class="bg-gray-950 overflow-hidden">
   <Container margin={false} padding={false}>
-    {#if mount}
-      <ItemViewer {item} exitButton={false}></ItemViewer>
-    {/if}
+    <ItemViewer {item} exitButton={false} allowShare={mount}></ItemViewer>
   </Container>
 </main>
 

@@ -7,6 +7,7 @@
   import ShareModal from "./ShareModal.svelte";
   export let item = {};
   export let exitButton = true;
+  export let allowShare = true;
 
   const message = item.message;
   delete item.message;
@@ -86,13 +87,16 @@
   </div>
 </Drawer>
 
-<ShareModal
-  id="share"
-  link={location.origin + hrefs.viewerDate.replace("slug", item.date)}
-></ShareModal>
-
+{#if allowShare}
+  <ShareModal
+    id="share"
+    link={location.origin + hrefs.viewerDate.replace("slug", item.date)}
+  ></ShareModal>
+{/if}
 <FloatElement>
-  <label for="share" class="btn btn-secondary">Share</label>
+  {#if allowShare}
+    <label for="share" class="btn btn-secondary">Share</label>
+  {/if}
   {#if exitButton}
     <button
       class="btn btn-primary shadow-2xl ms-2"
