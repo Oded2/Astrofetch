@@ -5,7 +5,6 @@
     formatDateTime,
     maxLen,
   } from "../../hooks.client.js";
-  import { hrefs } from "$lib/index.js";
   import { supabase as supabaseClient } from "$lib/index.js";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();

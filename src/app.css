@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 html {
-  font-family: "Quicksand", sans-serif;
-  font-weight: 500;
+  font-family: "Comfortaa", sans-serif;
 }
 .font-google-comfortaa {
   font-family: "Comfortaa", sans-serif;
   font-weight: 400;
+}
+
+.font-google-quicksand{
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
 }
