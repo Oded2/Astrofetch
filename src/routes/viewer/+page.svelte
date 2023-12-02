@@ -2,7 +2,6 @@
   import Title from "$lib/Title.svelte";
   import Container from "$lib/components/Container.svelte";
   import ItemViewer from "$lib/components/ItemViewer.svelte";
-  import { onMount } from "svelte";
 
   export let data;
   const { item } = data;
