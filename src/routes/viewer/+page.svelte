@@ -6,13 +6,11 @@
 
   export let data;
   const { item } = data;
-  let mount = false;
-  onMount(() => (mount = true));
 </script>
 
 <main class="bg-gray-950 overflow-hidden">
   <Container margin={false} padding={false}>
-    <ItemViewer {item} exitButton={false} allowShare={mount}></ItemViewer>
+    <ItemViewer {item} exitButton={false}></ItemViewer>
   </Container>
 </main>
 

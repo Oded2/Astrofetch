@@ -5,12 +5,15 @@
   import FloatElement from "./FloatElement.svelte";
   import { hrefs } from "$lib/index.js";
   import ShareModal from "./ShareModal.svelte";
+  import { page } from "$app/stores";
   export let item = {};
   export let exitButton = true;
-  export let allowShare = true;
 
   const message = item.message;
   delete item.message;
+
+  const origin = $page.url.origin;
+
   const dispatch = createEventDispatcher();
   function formatDateStr(str = "") {
     return formatDate(new Date(str));
@@ -85,19 +88,13 @@
   </div>
 </Drawer>
 
-{#if allowShare}
-  <ShareModal
-    id="share"
-    link={location.origin + hrefs.viewerDate.replace("slug", item.date)}
-  ></ShareModal>
-{/if}
+<ShareModal
+  id="share"
+  link={origin + hrefs.viewerDate.replace("slug", item.date)}
+></ShareModal>
+
 <FloatElement>
-  <label
-    for="share"
-    class="btn btn-secondary"
-    class:btn-disabled={!allowShare}
-    class:skeleton={!allowShare}>Share</label
-  >
+  <label for="share" class="btn btn-secondary">Share</label>
   {#if exitButton}
     <button
       class="btn btn-primary shadow-2xl ms-2"
