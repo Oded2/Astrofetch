@@ -88,7 +88,7 @@
 
 <ShareModal
   id="share"
-  link={addParamsString(location.origin + hrefs.viewer, item)}
+  link={location.origin + hrefs.viewerDate.replace("slug", item.date)}
 ></ShareModal>
 
 <FloatElement>

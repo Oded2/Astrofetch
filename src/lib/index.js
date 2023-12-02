@@ -10,6 +10,7 @@ export const hrefs = {
   account: "/protected/account",
   signout: "/signout",
   viewer: "/viewer",
+  viewerDate: "/viewer/slug",
   forgotpassword: "/forgotpassword",
   passwordreset: "/protected/passwordreset",
   profile: "/users/slug",
