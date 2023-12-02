@@ -17,7 +17,7 @@
   }
 </script>
 
-<div class="hero min-h-screen overflow-hidden">
+<div class="hero min-h-screen overflow-auto">
   <div class="hero-content flex-col xl:flex-row">
     <div class="text-center xl:text-left">
       <h1 class="text-5xl font-bold pb-2">{item.title}</h1>
@@ -47,7 +47,7 @@
     <div class="mb-10 xl:mb-0 w-full">
       {#if item.media_type === "image"}
         <img
-          class="rounded-xl shadow-2xl xl:min-w-[32rem] m-auto w-full xl:w-auto xl:max-w-screen-sm 2xl:max-w-screen-md sm:hover:scale-110 delay-100 transition-all max-h-[90vh]"
+          class="rounded-xl shadow-2xl xl:min-w-[32rem] m-auto w-full xl:w-auto xl:max-w-screen-sm 2xl:max-w-screen-md sm:hover:scale-110 transition-all max-h-[90vh]"
           src={item.url}
           alt={item.title}
         />
