@@ -21,6 +21,8 @@
       .eq("data", JSON.stringify(item))
       .eq("user_id", userId);
     if (data.length > 0) {
+      isPersonal = true;
+      saving = false;
       dispatch("duplicate");
       return;
     }
