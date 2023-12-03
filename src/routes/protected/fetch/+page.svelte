@@ -9,6 +9,7 @@
     dateToStr,
     fetchFromEndpoint,
     formatDate,
+    randomNum,
     waitForElm,
   } from "../../../hooks.client.js";
   import Title from "$lib/Title.svelte";
@@ -61,10 +62,9 @@
     return dateAdjust(days * 24 * 60 * 60 * 1000, date, max);
   }
   function getRandomDate(startDate, endDate) {
-    const startTimestamp = new Date(startDate).getTime();
-    const endTimestamp = new Date(endDate).getTime();
-    const randomTimestamp =
-      startTimestamp + Math.random() * (endTimestamp - startTimestamp + 1); // +1 to include the end date
+    const startTimestamp = new Date(startDate).valueOf();
+    const endTimestamp = new Date(endDate).valueOf();
+    const randomTimestamp = randomNum(startTimestamp, endTimestamp);
     const randomDate = new Date(randomTimestamp);
     const year = randomDate.getFullYear();
     const month = String(randomDate.getMonth() + 1).padStart(2, "0");
