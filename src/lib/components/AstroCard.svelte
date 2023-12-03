@@ -77,14 +77,15 @@
       {#if item.media_type === "image" || item.media_type === "video"}
         <button
           on:click={() => dispatch("view")}
-          class="btn btn-secondary w-full sm:w-24">View</button
+          class="btn btn-secondary w-full sm:w-24 font-quicksand">View</button
         >
       {/if}
       {#if !isPersonal && userId.length > 0}
         <button
           disabled={isSaved}
           on:click={vault}
-          class="btn btn-primary w-full sm:w-32">Save to Vault</button
+          class="btn btn-primary w-full sm:w-32 font-quicksand"
+          >Save to Vault</button
         >
       {/if}
     </div>

@@ -1,6 +1,9 @@
 export default {
   content: ["./src/**/*.{html,js,svelte,ts}"],
   theme: {
+    fontFamily: {
+      quicksand: ["Quicksand", "system-ui"],
+    },
     extend: {},
   },
   plugins: [require("daisyui")],
