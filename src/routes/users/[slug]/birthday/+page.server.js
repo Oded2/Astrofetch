@@ -7,7 +7,7 @@ const minDate = "1995-06-16";
 const apiUrl = "https://api.nasa.gov/planetary/apod";
 
 function findMinDate(birthday = "") {
-  const date = "1995-06-" + birthday.slice(-2);
+  const date = "1995" + birthday.slice(-6);
   if (date >= minDate) return date;
   return date.replace("1995", "1996");
 }
