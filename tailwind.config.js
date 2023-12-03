@@ -4,7 +4,6 @@ export default {
     fontFamily: {
       quicksand: ["Quicksand", "system-ui"],
     },
-    extend: {},
   },
   plugins: [require("daisyui")],
   daisyui: {
