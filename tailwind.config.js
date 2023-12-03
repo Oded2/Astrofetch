@@ -24,7 +24,7 @@ export default {
 
           success: "#3a8800",
 
-          warning: "#d57b00",
+          warning: "#b45309",
 
           error: "#b91c1c",
         },
