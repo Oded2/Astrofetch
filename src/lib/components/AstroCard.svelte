@@ -1,10 +1,5 @@
 <script>
-  import {
-    addParamsString,
-    formatDate,
-    formatDateTime,
-    maxLen,
-  } from "../../hooks.client.js";
+  import { formatDate, formatDateTime, maxLen } from "../../hooks.client.js";
   import { supabase as supabaseClient } from "$lib/index.js";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
