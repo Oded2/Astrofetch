@@ -33,17 +33,6 @@
   let lastItem = "";
   $: divider = parseInt((currentPage - 1) / pageBreakpoint) * pageBreakpoint;
   async function deleteFromVault(item = {}) {
-    progress = true;
-    const { error } = await supabase
-      .from("items")
-      .delete()
-      .eq("data", JSON.stringify(item.data))
-      .eq("user_id", session.user.id);
-    progress = false;
-    if (error) {
-      console.error(error.message);
-      return;
-    }
     for (const i in items) if (items[i].data === item.data) items.splice(i, 1);
     items = items;
   }

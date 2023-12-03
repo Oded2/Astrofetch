@@ -35,6 +35,20 @@
     }
     dispatch("success");
   }
+  async function remove() {
+    progress = true;
+    const { error } = await supabase
+      .from("items")
+      .delete()
+      .eq("data", JSON.stringify(item))
+      .eq("user_id", userId);
+    progress = false;
+    if (error) {
+      console.error(error.message);
+      return;
+    }
+    dispatch("delete");
+  }
 </script>
 
 <div
@@ -66,26 +80,25 @@
       </h4>
     {/if}
     <p>{maxLen(item.explanation)}</p>
-    <div class="mt-3 card-actions justify-end">
+    <div class="mt-3 card-actions justify-end font-quicksand">
       {#if isPersonal}
         <button
           disabled={progress}
           class="btn btn-warning w-full sm:w-auto"
-          on:click={() => dispatch("delete")}>Remove from Vault</button
+          on:click={remove}>Remove from Vault</button
         >
       {/if}
       {#if item.media_type === "image" || item.media_type === "video"}
         <button
           on:click={() => dispatch("view")}
-          class="btn btn-secondary w-full sm:w-24 font-quicksand">View</button
+          class="btn btn-secondary w-full sm:w-24">View</button
         >
       {/if}
       {#if !isPersonal && userId.length > 0}
         <button
           disabled={isSaved}
           on:click={vault}
-          class="btn btn-primary w-full sm:w-32 font-quicksand"
-          >Save to Vault</button
+          class="btn btn-primary w-full sm:w-32">Save to Vault</button
         >
       {/if}
     </div>
