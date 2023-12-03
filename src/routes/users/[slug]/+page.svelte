@@ -17,6 +17,8 @@
   export let data;
   const { supabase, session, profile } = data;
   let { items } = data;
+
+  const isPersonal = session ? profile.user_id === session.user.id : false;
   const maxItems = 12;
   const pageBreakpoint = 5;
   const maxPage = parseInt(
@@ -32,8 +34,11 @@
   let viewItem = {};
   let lastItem = "";
   $: divider = parseInt((currentPage - 1) / pageBreakpoint) * pageBreakpoint;
-  async function deleteFromVault(item = {}) {
-    for (const i in items) if (items[i].data === item.data) items.splice(i, 1);
+  async function remove(item = {}) {
+    if (isPersonal)
+      for (const i in items)
+        if (items[i].data === item.data) items.splice(i, 1);
+
     items = items;
   }
   function GetSortOrderCustom(prop, reverse = false) {
@@ -163,9 +168,7 @@
             >
               {#if index < currentPage * maxItems && index >= currentPage * maxItems - maxItems}
                 <AstroCard
-                  isPersonal={session
-                    ? session.user.id === profile.user_id
-                    : false}
+                  {isPersonal}
                   {supabase}
                   userId={session ? session.user.id : ""}
                   item={item.data}
@@ -183,7 +186,7 @@
                       "Added to Vault",
                       "This item has been added to your vault"
                     ))}
-                  on:delete={() => deleteFromVault(item)}
+                  on:delete={() => remove(item)}
                   on:view={() => {
                     lastItem = `item${index}`;
                     viewItem = item.data;

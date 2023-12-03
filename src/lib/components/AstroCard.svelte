@@ -9,12 +9,12 @@
   export let isPersonal = false;
   export let progress = false;
   export let dateVaulted = "";
-  let isSaved = false;
+  let saving = false;
   function formatDateStr(str) {
     return formatDate(new Date(str));
   }
   async function vault() {
-    isSaved = true;
+    saving = true;
     const { data } = await supabase
       .from("items")
       .select()
@@ -29,11 +29,12 @@
       .insert({ user_id: userId, data: item });
 
     if (error) {
-      isSaved = false;
+      saving = false;
       console.error(error.message);
       return;
     }
-    dispatch("success");
+    isPersonal = true;
+    saving = false;
   }
   async function remove() {
     progress = true;
@@ -47,6 +48,7 @@
       console.error(error.message);
       return;
     }
+    isPersonal = false;
     dispatch("delete");
   }
 </script>
@@ -96,7 +98,7 @@
       {/if}
       {#if !isPersonal && userId.length > 0}
         <button
-          disabled={isSaved}
+          disabled={saving}
           on:click={vault}
           class="btn btn-primary w-full sm:w-32">Save to Vault</button
         >
