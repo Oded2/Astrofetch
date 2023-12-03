@@ -1,8 +1,14 @@
 import { error } from "@sveltejs/kit";
 
 export function load({ url }) {
-  const item = {};
-  url.searchParams.forEach((value, key) => (item[key] = value));
+  const searchParams = url.searchParams;
+  const item = {
+    date: searchParams.get("date"),
+    title: searchParams.get("title"),
+    url: searchParams.get("url"),
+    media_type: searchParams.get("media_type"),
+    explanation: searchParams.get("explanation"),
+  };
   if (
     !item.date ||
     !item.title ||
@@ -11,5 +17,6 @@ export function load({ url }) {
     !item.explanation
   )
     throw error(400, "Invalid URL Parameters");
-  return { item };
+  const message = searchParams.get("message") ?? "";
+  return { item, message };
 }

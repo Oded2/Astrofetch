@@ -8,9 +8,7 @@
   import { page } from "$app/stores";
   export let item = {};
   export let exitButton = true;
-
-  const message = item.message;
-  delete item.message;
+  export let message = "";
 
   const origin = $page.url.origin;
 
@@ -25,13 +23,13 @@
     <div class="text-center xl:text-left">
       <h1 class="text-5xl font-bold pb-2">{item.title}</h1>
       <h2
-        class:mb-2={message}
-        class:mb-4={!message}
+        class:mb-2={message.length > 0}
+        class:mb-4={message.length == 0}
         class="text-xl font-semibold"
       >
         {formatDateStr(item.date)}
       </h2>
-      {#if message != null}
+      {#if message.length > 0}
         <h3 class="text-lg mb-4 font-semibold text-left">
           {message}
         </h3>

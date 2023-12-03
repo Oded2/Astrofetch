@@ -4,12 +4,12 @@
   import ItemViewer from "$lib/components/ItemViewer.svelte";
 
   export let data;
-  const { item } = data;
+  const { item, message } = data;
 </script>
 
 <main class="bg-gray-950 overflow-hidden">
   <Container margin={false} padding={false}>
-    <ItemViewer {item} exitButton={false}></ItemViewer>
+    <ItemViewer {message} {item} exitButton={false}></ItemViewer>
   </Container>
 </main>
 
