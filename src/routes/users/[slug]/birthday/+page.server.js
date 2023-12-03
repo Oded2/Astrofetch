@@ -17,17 +17,19 @@ export async function load({ params }) {
     .from("profiles")
     .select("birthday, display_name")
     .eq("username", params.slug);
-  if (data.length == 0) throw error(404, "User not found");
+  if (data.length == 0) throw error(404, { message: "User not found" });
   const birthday = data[0].birthday;
   const name = data[0].display_name;
-  if (!birthday) throw error(400, "User has not set a birthday");
+  if (!birthday) throw error(400, { message: "User has not set a birthday" });
   let newBirthday = birthday;
   if (birthday < minDate) newBirthday = findMinDate(birthday);
   const response = await fetch(
     addParamsString(apiUrl, { date: newBirthday, api_key: NASA })
   );
   if (!response.ok)
-    throw error(response.status, { message: response.statusText });
+    throw error(response.status, {
+      message: `Api Error: ${response.statusText}`,
+    });
   const item = await response.json();
   if (newBirthday !== birthday)
     item.message = `Note: ${name} was born on ${formatDate(
