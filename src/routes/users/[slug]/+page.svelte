@@ -90,10 +90,10 @@
         {/if}
       </div>
       <div class="mb-7">
-        <h5 class="text-lg font-semibold mb-1">
+        <h5 class="text-lg font-semibold mb-3">
           Username: {profile.username}
         </h5>
-        <label class="sm:flex mb-2 font-bold text-xl" for="sort">Sort</label>
+        <label class="sm:flex font-bold text-xl" for="sort">Sort</label>
         <div>
           <select
             bind:value={sortBy}
