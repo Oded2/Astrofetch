@@ -166,30 +166,24 @@
                   min={minDate}
                   max={dateToStr()}
                 />
-                <div class="mt-2">
-                  <fieldset class="grid grid-cols-3 gap-x-3">
-                    {#each adjustOptions as option}
-                      <button
-                        type="button"
-                        on:click={() =>
-                          (end = dateToStr(
+                <div class="mt-2 grid grid-cols-3 gap-x-3">
+                  {#each adjustOptions as option}
+                    <button
+                      type="button"
+                      on:click={() =>
+                        (end = dateToStr(
+                          dateAdjustDays(option, new Date(start), new Date())
+                        ))}
+                      disabled={end.length > 0 &&
+                        start.length > 0 &&
+                        end ==
+                          dateToStr(
                             dateAdjustDays(option, new Date(start), new Date())
-                          ))}
-                        disabled={end.length > 0 &&
-                          start.length > 0 &&
-                          end ==
-                            dateToStr(
-                              dateAdjustDays(
-                                option,
-                                new Date(start),
-                                new Date()
-                              )
-                            )}
-                        class="btn btn-accent text-base"
-                        >{option.toLocaleString()} Days
-                      </button>
-                    {/each}
-                  </fieldset>
+                          )}
+                      class="btn btn-accent text-base"
+                      >{option.toLocaleString()} Days
+                    </button>
+                  {/each}
                 </div>
               </div>
               <div class="card-actions justify-around">
