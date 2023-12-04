@@ -32,8 +32,10 @@ export async function load({ params }) {
     });
   const item = await response.json();
   if (newBirthday !== birthday)
-    item.message = `Note: ${name} was born on ${formatDate(
+    item.message = `
+  Note: ${name} was born on ${formatDate(
       new Date(birthday)
-    )}, which is before NASA had begun APOD, so the APOD shown is the earliest APOD on the user's birthay since APOD has begun.`;
+    )}, prior to the initiation of NASA's Astronomy Picture of the Day (APOD). Therefore, the APOD presented is the earliest one on the user's birthday since APOD's inception.`;
+
   throw redirect(301, addParamsString(hrefs.viewer, item));
 }
