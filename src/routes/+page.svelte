@@ -126,11 +126,12 @@
       </AccordionItem>
       <AccordionItem header="How do I use AstroFetch?">
         <p class="text-lg">
-          To use AstroFetch, simply <a class="underline" href={hrefs.login}
-            >login</a
+          To get started, first <a href={hrefs.signup} class="link"
+            >create an account</a
           >
-          and navigate to the
-          <a class="underline" href={hrefs.fetch}>fetch</a> page.
+          or <a href={hrefs.login} class="link">login</a>. Once you are logged
+          into AstroFetch, go to the
+          <a href={hrefs.fetch} class="link">fetch</a> page and follow the instructions.
         </p>
       </AccordionItem>
       <AccordionItem header="Development">
