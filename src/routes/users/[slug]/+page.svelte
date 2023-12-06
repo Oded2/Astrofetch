@@ -58,7 +58,7 @@
   }
 </script>
 
-<main class:bg-gray-950={view} id="main">
+<main class:bg-gray-950={view}>
   <Container padding={!view} margin={!view}>
     {#if view}
       <ItemViewer
