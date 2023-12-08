@@ -105,7 +105,7 @@
 <main>
   <Container>
     <div class="grid md:grid-cols-3 gap-4 place-items-center">
-      <FormCard title="Account Settings">
+      <FormCard title="Account Settings" width={false}>
         <form on:submit|preventDefault={changeEmail}>
           <div class="mb-4">
             <label for="email" class="card-title mb-2">Email</label>
