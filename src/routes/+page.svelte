@@ -52,7 +52,7 @@
 
 <main>
   <Container>
-    <div class="w-full text-center mb-10">
+    <div class="w-full text-center my-20">
       <h1 class="text-7xl font-semibold mb-6">
         Explore the <span class="text-accent">Universe</span>
       </h1>
