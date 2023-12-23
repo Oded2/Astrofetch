@@ -37,6 +37,7 @@
     }
     isPersonal = true;
     saving = false;
+    dispatch("success");
   }
   async function remove() {
     progress = true;
