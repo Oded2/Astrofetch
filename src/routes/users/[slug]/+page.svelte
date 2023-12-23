@@ -34,7 +34,7 @@
   let viewItem = {};
   let lastItem = "";
   $: divider = parseInt((currentPage - 1) / pageBreakpoint) * pageBreakpoint;
-  async function remove(item = {}) {
+  function remove(item = {}) {
     if (isPersonal)
       for (const i in items)
         if (items[i].data === item.data) items.splice(i, 1);
