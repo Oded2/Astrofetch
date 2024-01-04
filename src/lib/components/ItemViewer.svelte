@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { formatDate } from "../../hooks.client.js";
+  import { formatDate, waitForElm } from "../../hooks.client.js";
   import Drawer from "./Drawer.svelte";
   import FloatElement from "./FloatElement.svelte";
   import { hrefs } from "$lib/index.js";
@@ -9,10 +9,11 @@
   export let item = {};
   export let exitButton = true;
   export let message = "";
+  export let lastItem = "";
 
   const origin = $page.url.origin;
-
   const dispatch = createEventDispatcher();
+
   function formatDateStr(str = "") {
     return formatDate(new Date(str));
   }
@@ -96,7 +97,12 @@
   {#if exitButton}
     <button
       class="btn btn-primary shadow-2xl ms-2"
-      on:click={() => dispatch("exit")}
+      on:click={() => {
+        dispatch("exit");
+        waitForElm(`#${lastItem}`).then((e) =>
+          e.scrollIntoView({ block: "center" })
+        );
+      }}
       >Exit
     </button>
   {/if}

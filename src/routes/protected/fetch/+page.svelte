@@ -76,14 +76,7 @@
 <main class:bg-gray-950={view}>
   <Container padding={!view} margin={!view}>
     {#if view}
-      <ItemViewer
-        item={viewItem}
-        on:exit={() => {
-          view = false;
-          waitForElm(`#${lastItem}`).then((event) => {
-            event.scrollIntoView({ block: "center" });
-          });
-        }}
+      <ItemViewer item={viewItem} {lastItem} on:exit={() => (view = false)}
       ></ItemViewer>
     {:else}
       <div class="text-center mb-7">

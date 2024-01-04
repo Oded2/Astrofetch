@@ -63,11 +63,9 @@
     {#if view}
       <ItemViewer
         item={viewItem}
+        {lastItem}
         on:exit={() => {
           view = false;
-          waitForElm(`#${lastItem}`).then((event) => {
-            event.scrollIntoView({ block: "center" });
-          });
         }}
       ></ItemViewer>
     {:else}
