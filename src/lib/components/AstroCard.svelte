@@ -1,5 +1,10 @@
 <script>
-  import { formatDate, formatDateTime, maxLen } from "../../hooks.client.js";
+  import {
+    formatDate,
+    formatDateTime,
+    maxLen,
+    waitForElm,
+  } from "../../hooks.client.js";
   import { supabase as supabaseClient } from "$lib/index.js";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
@@ -95,7 +100,10 @@
       {/if}
       {#if item.media_type === "image" || item.media_type === "video"}
         <button
-          on:click={() => dispatch("view")}
+          on:click={() => {
+            dispatch("view");
+            waitForElm("#viewer").then((e) => e.scrollIntoView(true));
+          }}
           class="btn btn-secondary w-full sm:w-24">View</button
         >
       {/if}
