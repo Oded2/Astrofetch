@@ -54,6 +54,7 @@
       progress = false;
       return;
     }
+    temp.reverse();
     items = temp;
     fetchComplete = true;
     progress = false;
